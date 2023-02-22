@@ -36,9 +36,8 @@ longitude = opencage_data["results"][0]["geometry"]["lng"]
 # Get weather data for city using Tomorrow.io API
 # You can change the timesteps parameter to any of the following: 
 # 1d, 1h
-fields = "temperature,windSpeed,humidity,precipitationProbability,precipitationIntensity,precipitationType,rainAccumulation,pressureSurfaceLevel,evapotranspiration"
+fields = "temperature,windSpeed,humidity,precipitationProbability,rainAccumulation,evapotranspiration"
 sampling = "1h"
-# timesteps = "1d"
 
 tomorrow_endpoint = "https://api.tomorrow.io/v4/timelines?" \
                     "location={latitude},{longitude}" \
@@ -61,11 +60,13 @@ tomorrow_endpoint = tomorrow_endpoint.format(latitude=latitude,
 tomorrow_response = requests.get(tomorrow_endpoint)
 tomorrow_data = json.loads(tomorrow_response.text)
 
-with open('templates/data.json', 'w') as f:
+# Dumps API data into .json
+with open('data.json', 'w') as f:
     json.dump(tomorrow_data, f)
 
-with open('geo_data.json', 'w') as f:
-    json.dump(opencage_data, f)
+# Dumps Geo Data into .json
+# with open('geo_data.json', 'w') as f:
+#     json.dump(opencage_data, f)
 
 # Get all available data fields from response
 data_fields = []
@@ -134,5 +135,3 @@ def show_values():
 show_values()
 
 fig = make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
-
-
