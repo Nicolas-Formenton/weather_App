@@ -96,7 +96,6 @@ humidities = []
 windspeeds_kmh = []
 pop = []
 rain = []
-patm = []
 ETp = []
 
 for timeline in tomorrow_data["data"]["timelines"]:
@@ -107,7 +106,6 @@ for timeline in tomorrow_data["data"]["timelines"]:
         windspeeds_kmh.append(interval["values"]["windSpeed"]*3.6) # km/h
         pop.append(interval["values"]["precipitationProbability"])
         rain.append(round(interval["values"]["rainAccumulation"], 2))
-        patm.append(interval["values"]["pressureSurfaceLevel"])
         ETp.append(interval['values']['evapotranspiration'])
 
 # Loop over the dates, parse them and format them
