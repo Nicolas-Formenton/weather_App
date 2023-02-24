@@ -1,1 +1,46 @@
-{"data": {"timelines": [{"timestep": "1d", "endTime": "2023-02-25T09:00:00Z", "startTime": "2023-02-23T09:00:00Z", "intervals": [{"startTime": "2023-02-23T09:00:00Z", "values": {"evapotranspiration": 0.481, "humidity": 87, "precipitationProbability": 30, "rainAccumulation": 15.23, "temperature": 29, "windSpeed": 5.19}}, {"startTime": "2023-02-24T09:00:00Z", "values": {"evapotranspiration": 0.468, "humidity": 99.22, "precipitationProbability": 55, "rainAccumulation": 20.09, "temperature": 26.1, "windSpeed": 4.73}}, {"startTime": "2023-02-25T09:00:00Z", "values": {"evapotranspiration": 0.02, "humidity": 97.6, "precipitationProbability": 5, "rainAccumulation": 0.03, "temperature": 21.91, "windSpeed": 2.67}}]}]}}
+{
+  "data": {
+    "timelines": [
+      {
+        "timestep": "1d",
+        "endTime": "2023-02-25T09:00:00Z",
+        "startTime": "2023-02-23T09:00:00Z",
+        "intervals": [
+          {
+            "startTime": "2023-02-23T09:00:00Z",
+            "values": {
+              "evapotranspiration": 0.481,
+              "humidity": 87,
+              "precipitationProbability": 30,
+              "rainAccumulation": 15.23,
+              "temperature": 29,
+              "windSpeed": 5.19
+            }
+          },
+          {
+            "startTime": "2023-02-24T09:00:00Z",
+            "values": {
+              "evapotranspiration": 0.468,
+              "humidity": 99.22,
+              "precipitationProbability": 55,
+              "rainAccumulation": 20.09,
+              "temperature": 26.1,
+              "windSpeed": 4.73
+            }
+          },
+          {
+            "startTime": "2023-02-25T09:00:00Z",
+            "values": {
+              "evapotranspiration": 0.02,
+              "humidity": 97.6,
+              "precipitationProbability": 5,
+              "rainAccumulation": 0.03,
+              "temperature": 21.91,
+              "windSpeed": 2.67
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
