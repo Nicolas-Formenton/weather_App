@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 import json
 import requests
 import json
@@ -7,6 +7,10 @@ import datetime
 from plots import make_plots
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return redirect('/form')
 
 @app.route('/form')
 def form():
