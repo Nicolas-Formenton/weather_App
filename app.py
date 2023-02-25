@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/form')
 def form():
     return '''
-        <form action="/teste" method="post">
+        <form action="/previsao" method="post">
             <label for="city_name">City name:</label>
             <input type="text" id="city_name" name="city_name" required><br><br>
         
@@ -34,37 +34,13 @@ def form():
         </form>
     '''
 
-
-@app.route('/teste', methods=['POST'])
-def teste():
-    global form_data
-    form_data = []  
+@app.route('/previsao', methods=['GET', 'POST'])
+def previsao():
 
     city_name = request.form['city_name']
     initial_date = request.form['initial_date']
     final_date = request.form['final_date']
     timesteps = request.form['timesteps']
-
-    form_data.append(city_name)
-    form_data.append(initial_date)
-    form_data.append(final_date)
-    form_data.append(timesteps)
-
-    print(form_data)   
-
-    return form_data
-
-
-
-@app.route('/previsao', methods=['GET'])
-def previsao():
-    if not form_data:
-            return "Please fill the form first"
-    
-    city_name = form_data[0]
-    initial_date = form_data[1]
-    final_date = form_data[2]
-    timesteps = form_data[3]
 
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key
@@ -168,27 +144,28 @@ def previsao():
         formatted_date = parsed_date.strftime('%d/%m/%Y %Hh')
         formatted_dates.append(formatted_date)
 
-    def show_values():
-        for i in range(len(dates)):
-            if timesteps == '1d':
-                metric = 'd'
-            if timesteps == '1h':
-                metric = 'h'
+    # def show_values():
+    #     for i in range(len(dates)):
+    #         if timesteps == '1d':
+    #             metric = 'd'
+    #         if timesteps == '1h':
+    #             metric = 'h'
 
-            print(f'''
-            Data: {formatted_dates[i]}
-            Temperatura: {temperatures[i]} °C
-            Umidade: {humidities[i]} %
-            Velocidade do vento: {windspeeds_kmh[i]:.2f} km/h
-            Evapotranspiração: {ETp[i]} mm/{metric}
-            Possibilidade de precipitação: {pop[i]:.2f}%    
-            ''')
-    show_values()
+    #         print(f'''
+    #         Data: {formatted_dates[i]}
+    #         Temperatura: {temperatures[i]} °C
+    #         Umidade: {humidities[i]} %
+    #         Velocidade do vento: {windspeeds_kmh[i]:.2f} km/h
+    #         Evapotranspiração: {ETp[i]} mm/{metric}
+    #         Possibilidade de precipitação: {pop[i]:.2f}%    
+    #         ''')
+    # show_values()
 
     make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
 
     with open('data.json') as f:
         data = json.load(f)
+
     return jsonify(data)
 
 if __name__ == '__main__':
