@@ -1,0 +1,55 @@
+.divInput{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); /* para compatibilidade com o Safari */
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inputpage3{
+    width: 70%;
+    height: 40px;
+    background: #3a3953;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.btnaddproduto{
+    width: 50%;
+    height: 40px;
+    background: #3a3953;
+    border: none;
+    border-radius: 15px;
+    margin-top: 30px;
+    box-sizing: border-box;
+}
+
+.btnback{
+    background: none;
+    height: 27px;
+    position: absolute;
+    left: 70px;
+    top: 45px;
+    border: none;
+    transition: transform 0.1s ease-in-out;
+}
+
+.svgarrowleft{
+    width: 30px;
+    fill: white;
+    transition: transform 0.1s ease-in-out;
+    stroke: white;
+}
