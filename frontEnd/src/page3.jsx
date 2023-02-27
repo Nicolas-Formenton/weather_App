@@ -52,7 +52,8 @@ function Page3() {
         <input className='inputpage3' type="text" name="inputQuantidade" placeholder='Quantidade'/>
         <input className='inputpage3' type="text" name="inputDosagem" placeholder='Dosagem'/>
         <input className='inputpage3' type="number"  step="0.01" pattern="[0-9]+([,.][0-9]+)?" name="inputPreco" placeholder='Preço'/>
-        <input className='inputpage3' type="date" name="inputDate" placeholder="Data de Aplicação" />
+        <input className='inputpage3' type="datetime-local" name="inputDate" placeholder="Data de Aplicação" />
+        <input className='inputpage3' type="datetime-local" name="inputDate" placeholder="Data de Aplicação" />
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
             onMouseUp={handleMouseClickOut}>SALVAR</button>
     </div>
