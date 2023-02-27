@@ -10,41 +10,41 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return redirect('/form')
+    return redirect('/previsao')
 
-@app.route('/form')
-def form():
-    return '''
-        <form action="/previsao" method="post">
-            <label for="city_name">City name:</label>
-            <input type="text" id="city_name" name="city_name" required><br><br>
+# @app.route('/form')
+# def form():
+#     return '''
+#         <form action="/previsao" method="post">
+#             <label for="city_name">City name:</label>
+#             <input type="text" id="city_name" name="city_name" required><br><br>
         
-            <label for="initial_date">Initial date:</label>
-            <input type="text" id="initial_date" name="initial_date" placeholder="dd/mm hh" required><br><br>
+#             <label for="initial_date">Initial date:</label>
+#             <input type="text" id="initial_date" name="initial_date" placeholder="dd/mm hh" required><br><br>
         
-            <label for="final_date">Final date:</label>
-            <input type="text" id="final_date" name="final_date" placeholder="dd/mm hh" required><br><br>
+#             <label for="final_date">Final date:</label>
+#             <input type="text" id="final_date" name="final_date" placeholder="dd/mm hh" required><br><br>
         
-            <label for="timesteps">Timesteps:</label>
-            <br>
-            <input type="radio" id="1h" name="timesteps" value="1h">
-            <label for="1h">1 Hour</label>
-            <br>
-            <input type="radio" id="1d" name="timesteps" value="1d">
-            <label for="1d">1 Day</label>
-            <br><br>
+#             <label for="timesteps">Timesteps:</label>
+#             <br>
+#             <input type="radio" id="1h" name="timesteps" value="1h">
+#             <label for="1h">1 Hour</label>
+#             <br>
+#             <input type="radio" id="1d" name="timesteps" value="1d">
+#             <label for="1d">1 Day</label>
+#             <br><br>
         
-            <input type="submit" value="Get weather data"><br><br>
-        </form>
-    '''
+#             <input type="submit" value="Get weather data"><br><br>
+#         </form>
+#     '''
 
 @app.route('/previsao', methods=['GET', 'POST'])
 def previsao():
 
-    city_name = request.form['city_name']
-    initial_date = request.form['initial_date']
-    final_date = request.form['final_date']
-    timesteps = request.form['timesteps']
+    city_name = request.get_json()['cidade']
+    initial_date = request.get_json()['dateEntrada']
+    final_date = request.get_json()['dateSaida']
+    timesteps = request.get_json()['timesteps']
 
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key

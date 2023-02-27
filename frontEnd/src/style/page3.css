@@ -53,3 +53,7 @@ input[type=number]::-webkit-outer-spin-button {
     transition: transform 0.1s ease-in-out;
     stroke: white;
 }
+
+.ajusteradio{
+    display: flex;
+}
