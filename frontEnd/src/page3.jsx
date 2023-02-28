@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import page3 from './style/page3.css';
 import Page2 from './page2';
-import Form from './Form';
 import { format } from 'date-fns';
 
 function Page3() {
