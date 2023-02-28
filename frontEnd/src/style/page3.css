@@ -27,6 +27,11 @@ input[type=number]::-webkit-outer-spin-button {
     box-sizing: border-box;
 }
 
+input:focus {
+    outline: none; /* remove a borda que aparece ao clicar */
+    background-color: #3a3953; /* volta à cor de fundo original */
+}
+
 .btnaddproduto{
     width: 50%;
     height: 40px;

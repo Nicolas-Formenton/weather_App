@@ -2,8 +2,6 @@
 import page1 from "./style/page1.css";
 import React, { useState } from 'react';
 import { useSpring } from 'react-spring';
-
-import Form from './Form';
 import Page2 from "./page2";
 
 function Page1() {
