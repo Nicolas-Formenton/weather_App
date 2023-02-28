@@ -1,0 +1,12 @@
+.nextstep{
+    width: 70%;
+    height: 27px;
+    background: #3a3953;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    transition: transform 0.1s ease-in-out;
+}
+
