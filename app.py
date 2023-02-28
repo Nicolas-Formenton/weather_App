@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, redirect
+from flask_cors import CORS
 import json
 import requests
 import json
@@ -7,44 +8,25 @@ import datetime
 from plots import make_plots
 
 app = Flask(__name__)
+CORS(app,  origins=['http://localhost:5173'])
 
 @app.route('/')
 def index():
-    return redirect('/previsao')
+    return redirect('/api')
 
-# @app.route('/form')
-# def form():
-#     return '''
-#         <form action="/previsao" method="post">
-#             <label for="city_name">City name:</label>
-#             <input type="text" id="city_name" name="city_name" required><br><br>
-        
-#             <label for="initial_date">Initial date:</label>
-#             <input type="text" id="initial_date" name="initial_date" placeholder="dd/mm hh" required><br><br>
-        
-#             <label for="final_date">Final date:</label>
-#             <input type="text" id="final_date" name="final_date" placeholder="dd/mm hh" required><br><br>
-        
-#             <label for="timesteps">Timesteps:</label>
-#             <br>
-#             <input type="radio" id="1h" name="timesteps" value="1h">
-#             <label for="1h">1 Hour</label>
-#             <br>
-#             <input type="radio" id="1d" name="timesteps" value="1d">
-#             <label for="1d">1 Day</label>
-#             <br><br>
-        
-#             <input type="submit" value="Get weather data"><br><br>
-#         </form>
-#     '''
-
-@app.route('/previsao', methods=['GET', 'POST'])
+@app.route('/previsao', methods=['GET','POST'])
 def previsao():
+    content_type = request.headers.get('Content-Type')
+    if content_type != 'application/json':
+        return jsonify({'error': 'Invalid Content-Type'}), 400
+    
+    data = request.get_json()
 
-    city_name = request.get_json()['cidade']
-    initial_date = request.get_json()['dateEntrada']
-    final_date = request.get_json()['dateSaida']
-    timesteps = request.get_json()['timesteps']
+    city_name = data['cidade']
+    initial_date = data['dateEntrada']
+    final_date = data['dateSaida']
+    timesteps = data['timesteps']
+
 
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key
@@ -148,25 +130,12 @@ def previsao():
         formatted_date = parsed_date.strftime('%d/%m/%Y %Hh')
         formatted_dates.append(formatted_date)
 
-    # def show_values():
-    #     for i in range(len(dates)):
-    #         if timesteps == '1d':
-    #             metric = 'd'
-    #         if timesteps == '1h':
-    #             metric = 'h'
-
-    #         print(f'''
-    #         Data: {formatted_dates[i]}
-    #         Temperatura: {temperatures[i]} °C
-    #         Umidade: {humidities[i]} %
-    #         Velocidade do vento: {windspeeds_kmh[i]:.2f} km/h
-    #         Evapotranspiração: {ETp[i]} mm/{metric}
-    #         Possibilidade de precipitação: {pop[i]:.2f}%    
-    #         ''')
-    # show_values()
-
     make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
 
+    return data
+
+@app.route("/api", methods=['GET'])
+def api():
     with open('data.json') as f:
         data = json.load(f)
 
