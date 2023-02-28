@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import page2 from './style/page2.css'
 import Page3 from './page3'
+import Page3_2 from './Page3_2'
+import Mudas from './Mudas'
+import Colheita from './Colheita'
+import Plantio from './Plantio';
+
 
 function Page2() {
     //EFEITO CLICK PRODUTOS
@@ -49,30 +54,51 @@ function Page2() {
         btnopcao4.style.transform = "translateY(0px)";
       };
 
-      //Ativação e desativação da pagina1
-  const [active, setActive] = useState(true);
+      //Ativação e desativação das paginas
+      const [destination, setDestination] = useState("");
 
-  const handleButtonActiveProdutos = () => {
-    setActive(false);
-  }
+      const handleButtonProdutos = () => {
+        setDestination("produtos");
+      };
+    
+      const handleButtonMudas = () => {
+        setDestination("mudas");
+      };
 
-  if (!active) {
-    return <Page3 />;
-  }
+      const handleButtonPlantio = () => {
+        setDestination("plantio");
+      };
+
+      const handleButtonColheita = () => {
+        setDestination("colheita");
+      };
+    
+      if (destination === "produtos") {
+        return <Page3 />;
+      } else if (destination === "mudas") {
+        return <Mudas />;
+      } 
+      else if (destination === "plantio") {
+        return <Plantio />;
+      }
+      else if (destination === "colheita") {
+        return <Colheita />;
+      }else {
+        return (
+          <div className='btnlista'>
+              <button className='btnopcao efeitoClick' onMouseDown={handleMouseClickIn}
+                  onMouseUp={handleMouseClickOut} onClick={handleButtonProdutos}>PRODUTOS</button>
+              <button className='btnopcao efeitoClick2' onMouseDown={handleMouseClickIn2}
+                  onMouseUp={handleMouseClickOut2} onClick = {handleButtonMudas}> MUDAS</button>
+              <button className='btnopcao efeitoClick3' onMouseDown={handleMouseClickIn3}
+                  onMouseUp={handleMouseClickOut3} onClick = {handleButtonPlantio}>PLANTIO</button>
+              <button className='btnopcao efeitoClick4' onMouseDown={handleMouseClickIn4}
+                  onMouseUp={handleMouseClickOut4} onClick = {handleButtonColheita}>COLHEITA</button>
+          </div>
+          );
+      }
 
 
-    return (
-    <div className='btnlista'>
-        <button className='btnopcao efeitoClick' onMouseDown={handleMouseClickIn}
-            onMouseUp={handleMouseClickOut} onClick={handleButtonActiveProdutos}>PRODUTOS</button>
-        <button className='btnopcao efeitoClick2' onMouseDown={handleMouseClickIn2}
-            onMouseUp={handleMouseClickOut2}> MUDAS</button>
-        <button className='btnopcao efeitoClick3' onMouseDown={handleMouseClickIn3}
-            onMouseUp={handleMouseClickOut3}>PLANTIO</button>
-        <button className='btnopcao efeitoClick4' onMouseDown={handleMouseClickIn4}
-            onMouseUp={handleMouseClickOut4}>COLHEITA</button>
-    </div>
-    );
 }
 
 export default Page2;
