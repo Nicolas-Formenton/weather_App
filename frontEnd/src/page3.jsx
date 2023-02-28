@@ -63,23 +63,19 @@ function Page3() {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
+
+        return <Page3_2 />
       };
 
  //Ativação e desativação das paginas
  const [destination, setDestination] = useState("");
-
- const handleButtonPage3_2 = () => {
-   setDestination("Page3_2");
- };
 
  const handleButtonBack = () => {
    setDestination("back");
  };
 
 
- if (destination === "Page3_2") {
-   return <Page3_2 />;
- } else if (destination === "back") {
+  if (destination === "back") {
    return <Page2 />;
  }else{
   return (
@@ -105,7 +101,7 @@ function Page3() {
             <label hmtlfor="1d">1 Day</label>
           </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
-            onMouseUp={handleMouseClickOut} onClick = {handleButtonPage3_2}>Submit</button>
+            onMouseUp={handleMouseClickOut}>Submit</button>
     </form>
     );
  }
