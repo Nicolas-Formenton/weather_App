@@ -7,7 +7,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   {/*Aqui estão os dados <App /> */}
   {/*Aqui vai estar a interface <Home />*/}
-  
   <Home />
   </React.StrictMode>,
 )
