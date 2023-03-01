@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import page3_2 from './style/page3_2.css';
 import { format } from 'date-fns';
-import Page3 from './page3';
+import Page3 from './Cafe';
 
 function Page3_2() {
 

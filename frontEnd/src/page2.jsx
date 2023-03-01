@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import page2 from './style/page2.css'
-import Page3 from './page3'
+import Page3 from './Cafe'
 import Gado from './Gado'
 
 

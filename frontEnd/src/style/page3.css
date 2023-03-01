@@ -17,10 +17,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .inputpage3{
     width: 70%;
-    height: 40px;
+    height: 45px;
     background: #204b5e;
-    border: none;
-    border-radius: 8px;
+    border: 1px solid black;
+    border-radius: 6px;
     margin-bottom: 15px;
     padding-left: 15px;
     padding-right: 15px;
@@ -60,5 +60,13 @@ input:focus {
 }
 
 .ajusteradio{
+    display: none;
+}
+
+.dates {
     display: flex;
+    width: 70%;
+}
+.date_between {
+    width: 80px;
 }
