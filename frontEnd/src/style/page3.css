@@ -18,9 +18,9 @@ input[type=number]::-webkit-outer-spin-button {
 .inputpage3{
     width: 70%;
     height: 40px;
-    background: #3a3953;
+    background: #204b5e;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     margin-bottom: 15px;
     padding-left: 15px;
     padding-right: 15px;
@@ -29,15 +29,15 @@ input[type=number]::-webkit-outer-spin-button {
 
 input:focus {
     outline: none; /* remove a borda que aparece ao clicar */
-    background-color: #3a3953; /* volta à cor de fundo original */
+    background-color: #204b5e; /* volta à cor de fundo original */
 }
 
 .btnaddproduto{
     width: 50%;
-    height: 40px;
-    background: #3a3953;
+    height: 56px;
+    background: #204b5e;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     margin-top: 30px;
     box-sizing: border-box;
 }
@@ -52,11 +52,11 @@ input:focus {
     transition: transform 0.1s ease-in-out;
 }
 
-.svgarrowleft{
+.svgarrowleft path{
     width: 30px;
-    fill: white;
+    fill: #204b5e;
     transition: transform 0.1s ease-in-out;
-    stroke: white;
+    stroke: #204b5e;
 }
 
 .ajusteradio{

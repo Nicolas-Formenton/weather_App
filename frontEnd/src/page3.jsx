@@ -3,7 +3,7 @@ import page3 from './style/page3.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
 import Page3_2 from './Page3_2';
-
+import MenuBar from './menubar'
 function Page3() {
 
 
@@ -70,9 +70,26 @@ function Page3() {
  //Ativação e desativação das paginas
  const [destination, setDestination] = useState("");
 
+ const handleButtonPage3_2 = () => {
+   setDestination("Page3_2");
+ };
+
  const handleButtonBack = () => {
    setDestination("back");
  };
+
+
+//  Sumindo com as divs do menu
+
+const handleAddVisibilityGado = () => {
+  const element = document.querySelector('.barraSuperiorGado');
+  element.classList.add('hidden');
+};
+
+const handleAddVisibilityRelatorio = () => {
+  const element = document.querySelector('.barraSuperiorRelatorio');
+  element.classList.add('hidden');
+};
 
 
   if (destination === "back") {
@@ -82,15 +99,14 @@ function Page3() {
     <form action = "/previsao" method="post" className='divInput'  onSubmit={handleSubmit}>
         <button className='btnback' onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave} onClick={handleButtonBack}><svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
-        <input className='inputpage3' type="text" name="inputName" placeholder='Nome'/>
-        <input className='inputpage3' type="text" name="inputQuantidade" placeholder='Quantidade'/>
-        <input className='inputpage3' type="text" name="inputDosagem" placeholder='Dosagem'/>
-        <input className='inputpage3' type="number"  step="0.01" pattern="[0-9]+([,.][0-9]+)?" name="inputPreco" placeholder='Preço'/>
-        <input className='inputpage3' type="text" name="inputCity" placeholder='Cidade' value = {cidade} onChange={(e) => setCidade(e.target.value)}/>
-        <input className='inputpage3' type="text" name="inputDateInicial" placeholder="dd/mm hh" value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />
-        <input className='inputpage3' type="text" name="inputDateFinal" placeholder="dd/mm hh" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)} />
+        <input className='inputpage3' type="text" name="inputName" placeholder='NOME'/>
+        <input className='inputpage3' type="text" name="inputQuantidade" placeholder='QUANTIDADE'/>
+        <input className='inputpage3' type="text" name="inputDosagem" placeholder='DOSAGEM'/>
+        <input className='inputpage3' type="text" name="inputCity" placeholder='CIDADE' value = {cidade} onChange={(e) => setCidade(e.target.value)}/>
+        <input className='inputpage3' type="text" name="inputDateInicial" placeholder="DD/MM HH" value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />
+        <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DD/MM HH" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)} />
 
-        <label htmlfor="timesteps">Timesteps:</label>
+        {/* <label htmlfor="timesteps">Timesteps:</label>
         
         <div className='ajusteradio' value = {timesteps}>
             <br/>
@@ -99,9 +115,10 @@ function Page3() {
             <br/>
             <input type="radio" id="1d" name="timesteps" value="1d" onChange={(e) => setTimesteps(e.target.value)}/>
             <label hmtlfor="1d">1 Day</label>
-          </div>
+          </div> */}
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
-            onMouseUp={handleMouseClickOut}>Submit</button>
+            onMouseUp={handleMouseClickOut}>SUBMIT</button>
+        <MenuBar />
     </form>
     );
  }

@@ -8,13 +8,25 @@
     transition: transform 0.1s ease-in-out;
 }
 
-.svgarrowleft{
+.divgado{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.svgarrowleft path{
     width: 30px;
-    fill: white;
+    fill: #204b5e;
     transition: transform 0.1s ease-in-out;
-    stroke: white;
+    stroke: #204b5e;
 }
 
 .ajustebtnback{
     position: relative;
+    color: #204b5e;
+}
+
+.iconmanutencao path{
+    fill: #204b5e;
 }

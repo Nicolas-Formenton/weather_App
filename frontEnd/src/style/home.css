@@ -1,10 +1,16 @@
 h2 {
     margin: 0;
+    color: #204b5e;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.4;
 }
 
 
 .RetanguloPai {
-    background-image: url("./img/splashScreen.png");
+    background: #e4ebf0;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -13,7 +19,7 @@ h2 {
 
     height: 768px;
     width: 512px;
-
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
