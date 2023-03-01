@@ -6,14 +6,12 @@ import Page3_2 from './Page3_2';
 import MenuBar from './menubar'
 function Page3() {
 
-
   const [cidade, setCidade] = useState('');
   const [dateEntrada, setDateEntrada] = useState('');
   const [dateSaida, setDateSaida] = useState('');
   const [timesteps, setTimesteps] = useState('');
 
     //EFEITO CLICK BTNADDPRODUTO
-    
     const handleMouseClickIn = () => {
         const btnaddproduto = document.querySelector(".btnaddproduto")
         btnaddproduto.style.transform = "translateY(3px)";
@@ -30,16 +28,22 @@ function Page3() {
         arrowIcon.style.transform = "translateX(-5px)";
         arrowIcon.style.strokeWidth = "1px";
       };
-    
+      
       const handleMouseLeave = () => {
         const arrowIcon = document.querySelector(".svgarrowleft");
         arrowIcon.style.transform = "none";
         arrowIcon.style.strokeWidth = "0px";
       };
+      
+      //Ativação e desativação das paginas
+      const [destination, setDestination] = useState("");
+      
+      const handleButtonBack = () => {
+        setDestination("back");
+      };
 
       const handleSubmit = (e) => {
         e.preventDefault();
-
         // loop p ver no console o que está saindo do submit
         const formData = new FormData(e.target);
         const data = {};
@@ -47,7 +51,8 @@ function Page3() {
           data[key] = value;
         }
         console.log(JSON.stringify(data));
-
+        
+        // enviando dados do formulário pra api
         fetch('http://127.0.0.1:5000/previsao', {
           method: 'POST',
           headers: {
@@ -63,21 +68,7 @@ function Page3() {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
-
-        return <Page3_2 />
       };
-
- //Ativação e desativação das paginas
- const [destination, setDestination] = useState("");
-
- const handleButtonPage3_2 = () => {
-   setDestination("Page3_2");
- };
-
- const handleButtonBack = () => {
-   setDestination("back");
- };
-
 
 //  Sumindo com as divs do menu
 
@@ -121,8 +112,7 @@ const handleAddVisibilityRelatorio = () => {
         <MenuBar />
     </form>
     );
- }
-
+  }
 }
 
 export default Page3;
