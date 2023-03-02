@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import page3 from './style/page3.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
-import ApiCafe from './apiCafePage';
+import ApiCafe from './Cafe2';
 import MenuBar from './menubar'
 
 function Cafe() {
