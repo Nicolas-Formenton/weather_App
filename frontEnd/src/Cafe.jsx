@@ -4,7 +4,8 @@ import Page2 from './page2';
 import { format } from 'date-fns';
 import Page3_2 from './Page3_2';
 import MenuBar from './menubar'
-function Page3() {
+
+function Cafe() {
 
   const [cidade, setCidade] = useState('');
   const [dateEntrada, setDateEntrada] = useState('');
@@ -81,6 +82,11 @@ const handleAddVisibilityRelatorio = () => {
   element.classList.add('hidden');
 };
 
+//MenuBar barras
+const exibirBarraSuperiorRelatorio = false;
+const exibirBarraSuperiorCafe = true;
+const exibirBarraSuperiorGado = false;
+
 
   if (destination === "back") {
    return <Page2 />;
@@ -102,10 +108,10 @@ const handleAddVisibilityRelatorio = () => {
         </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
             onMouseUp={handleMouseClickOut}>SUBMIT</button>
-        <MenuBar />
+        <MenuBar exibirBarraSuperiorRelatorio={exibirBarraSuperiorRelatorio} exibirBarraSuperiorCafe={exibirBarraSuperiorCafe} exibirBarraSuperiorGado={exibirBarraSuperiorGado}/>
     </form>
     );
   }
 }
 
-export default Page3;
+export default Cafe;
