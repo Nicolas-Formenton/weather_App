@@ -115,7 +115,7 @@ const exibirBarraSuperiorGado = false;
           <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DIA/MES HORA" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
         </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
-            onMouseUp={handleMouseClickOut}>SUBMIT</button>
+            onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
         <MenuBar exibirBarraSuperiorRelatorio={exibirBarraSuperiorRelatorio} exibirBarraSuperiorCafe={exibirBarraSuperiorCafe} exibirBarraSuperiorGado={exibirBarraSuperiorGado}/>
     </form>
     );
