@@ -64,13 +64,13 @@ function ApiGado() {
       {data.data.timelines.map((timeline, index) => (
         <div key={index}>
           {/* <h2>{timeline.startTime} - {timeline.endTime}</h2> */}
-          <div className='api'>
-            {timeline.intervals.map((interval, index) => (
-              <ul className='list' key={index}>
+          <div>
+            {timeline.intervals.map((interval, index) => (           
+              <ul key={index}>
                 <li>{interval.startTime}</li>
-                <p>Temperature: {interval.values.temperature}°C</p>
-                <p>Precipitation probability: {interval.values.precipitationProbability}%</p>
-                <p>Rain accumulation: {interval.values.rainAccumulation} mm/d</p>
+                <li>Temperature: {interval.values.temperature}°C</li>
+                <li>Precipitation probability: {interval.values.precipitationProbability}%</li>
+                <li>Rain accumulation: {interval.values.rainAccumulation} mm/d</li>
               </ul>
             ))}
           </div>

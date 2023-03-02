@@ -19,8 +19,8 @@ h2 {
     background-position: center;
     border-radius: 8px;
     border: 2px solid black;
-    height: 768px;
-    width: 512px;
+    height: 920px;
+    width: 578px;
     position: relative;
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@ h2 {
 }
 
 ::-webkit-scrollbar{
-    width: 6px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -65,4 +65,4 @@ h2 {
 ::-webkit-scrollbar-track {
     background: #e4ebf0;
     border-radius: 20px;
- }
+}
