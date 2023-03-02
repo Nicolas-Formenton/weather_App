@@ -4,7 +4,8 @@ import Page2 from './page2';
 import { format } from 'date-fns';
 import ApiCafe from './apiCafePage';
 import MenuBar from './menubar'
-function Page3() {
+
+function Cafe() {
 
   const [cidade, setCidade] = useState('');
   const [dateEntrada, setDateEntrada] = useState('');
@@ -85,6 +86,11 @@ const handleAddVisibilityRelatorio = () => {
   element.classList.add('hidden');
 };
 
+//MenuBar barras
+const exibirBarraSuperiorRelatorio = false;
+const exibirBarraSuperiorCafe = true;
+const exibirBarraSuperiorGado = false;
+
 
   if (destination === "back") {
    return <Page2 />;
@@ -109,11 +115,11 @@ const handleAddVisibilityRelatorio = () => {
           <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DIA/MES HORA" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
         </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
-            onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
-        <MenuBar />
+            onMouseUp={handleMouseClickOut}>SUBMIT</button>
+        <MenuBar exibirBarraSuperiorRelatorio={exibirBarraSuperiorRelatorio} exibirBarraSuperiorCafe={exibirBarraSuperiorCafe} exibirBarraSuperiorGado={exibirBarraSuperiorGado}/>
     </form>
     );
   }
 }
 
-export default Page3;
+export default Cafe;
