@@ -18,3 +18,17 @@
 .ajustebtnback{
     position: relative;
 }
+
+.api {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+}
+
+.list {
+    border: 1px solid black;
+    display:  inline-table;
+    border-radius: 8px;
+}

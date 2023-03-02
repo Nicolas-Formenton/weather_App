@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import page3 from './style/page3.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
-import Page3_2 from './Page3_2';
+import ApiCafe from './apiCafePage';
 import MenuBar from './menubar'
 function Page3() {
 
@@ -39,6 +39,10 @@ function Page3() {
       
       const handleButtonBack = () => {
         setDestination("back");
+      };
+
+      const handleButtonForward = () => {
+        setDestination("apiCafe")
       };
 
       const handleSubmit = (e) => {
@@ -84,7 +88,11 @@ const handleAddVisibilityRelatorio = () => {
 
   if (destination === "back") {
    return <Page2 />;
- }else{
+  }
+  else if(destination == "apiCafe"){
+    return <ApiCafe/>;
+  }
+  else{
   return (
     <form action = "/apiCafe" method="post" className='divInput'  onSubmit={handleSubmit}>
         <button className='btnback' onMouseEnter={handleMouseEnter}
@@ -101,7 +109,7 @@ const handleAddVisibilityRelatorio = () => {
           <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DIA/MES HORA" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
         </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
-            onMouseUp={handleMouseClickOut}>SUBMIT</button>
+            onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
         <MenuBar />
     </form>
     );
