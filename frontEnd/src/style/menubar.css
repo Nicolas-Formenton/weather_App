@@ -39,3 +39,8 @@
 .hidden{
     visibility: hidden;
 }
+
+.btnmenubar{
+    background: none;
+    border: none;
+}

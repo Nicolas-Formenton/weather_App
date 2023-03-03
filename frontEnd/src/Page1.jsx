@@ -1,8 +1,10 @@
-
+import menubar from './style/menubar.css'
 import page1 from "./style/page1.css";
 import React, { useState } from 'react';
 import { useSpring } from 'react-spring';
 import Page2 from "./page2";
+import Cafe from './Cafe'
+import Gado from './Gado'
 
 function Page1() {
   const [isHovering, setIsHovering] = useState(false);
