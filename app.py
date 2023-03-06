@@ -5,12 +5,13 @@ import requests
 import json
 import config
 import datetime
+import pytz
 from plots import make_plots
 
 app = Flask(__name__)
-CORS(app,  origins=['http://127.0.0.1:5173/'])
+CORS(app,  origins=['http://localhost:5173'])
 
-@app.route('/dadosCafe', methods=['GET','POST'])
+@app.route('/dadosCafe', methods=['POST'])
 def previsao_cafe():
     content_type = request.headers.get('Content-Type')
     if content_type != 'application/json':
@@ -23,7 +24,6 @@ def previsao_cafe():
     final_date = data['dateSaida']
     timesteps = '1h'
 
-
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key
     tomorrow_api_key = config.tomorrow_api_key
@@ -31,10 +31,14 @@ def previsao_cafe():
     # Get the current year
     current_year = datetime.datetime.now().year
 
+    utc3 = pytz.timezone('America/Sao_Paulo')  
+
     initial_parsed_date = datetime.datetime.strptime(initial_date, '%d/%m %Hh').replace(year=current_year)
+    initial_parsed_date = initial_parsed_date.astimezone(utc3)
     startTime = initial_parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
 
     final_parsed_date = datetime.datetime.strptime(final_date, '%d/%m %Hh').replace(year=current_year)
+    final_parsed_date = final_parsed_date.astimezone(utc3)
     endTime = final_parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
 
     # Get latitude and longitude coordinates for city using OpenCage API
@@ -119,11 +123,13 @@ def previsao_cafe():
             rain.append(round(interval["values"]["rainAccumulation"], 2))
             ETp.append(interval['values']['evapotranspiration'])
 
+
+
     # Loop over the dates, parse them and format them
     formatted_dates = []
     for date in dates:
-        parsed_date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
-        formatted_date = parsed_date.strftime('%d/%m/%Y %Hh')
+        parsed_date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc)
+        formatted_date = parsed_date.strftime('%d/%m/%Y %Hh').astimezone(utc3)
         formatted_dates.append(formatted_date)
 
     make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
