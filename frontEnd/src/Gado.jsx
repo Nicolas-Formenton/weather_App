@@ -100,7 +100,7 @@ const exibirBarraSuperiorRelatorio = false;
 const exibirBarraSuperiorCafe = false;
 const exibirBarraSuperiorGado = true;
 const exibirBarraSuperiorHome = false;
-   
+
 
 
  if (destination === "back") {
@@ -108,7 +108,8 @@ const exibirBarraSuperiorHome = false;
  }
  else if(destination == "apiCafe"){
    return <ApiCafe/>;
- }if (destination === "cafe") {
+ }
+ if (destination === "cafe") {
    return <Cafe />;
  }
  else if (destination === "gado") {
@@ -134,21 +135,6 @@ const exibirBarraSuperiorHome = false;
         </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
             onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
-        {/* <MenuBar exibirBarraSuperiorRelatorio={exibirBarraSuperiorRelatorio} exibirBarraSuperiorCafe={exibirBarraSuperiorCafe} exibirBarraSuperiorGado={exibirBarraSuperiorGado}/> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

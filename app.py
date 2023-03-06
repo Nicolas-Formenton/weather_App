@@ -146,7 +146,7 @@ def api_cafe():
 
 
 
-@app.route('/dadosGado', methods=['GET','POST'])
+@app.route('/dadosGado', methods=['POST'])
 def previsao_gado():
     content_type = request.headers.get('Content-Type')
     if content_type != 'application/json':
