@@ -139,6 +139,12 @@ const exibirBarraSuperiorHome = false;
 
 
 
+
+
+
+
+
+
 {/* AQUI É A  MENUBAR */}
 
         <div className='barra'>
