@@ -27,7 +27,6 @@ def previsao_cafe():
     final_date = data['dateSaida']
     timesteps = '1h'
 
-
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key
     tomorrow_api_key = config.tomorrow_api_key
@@ -131,7 +130,7 @@ def previsao_cafe():
     formatted_dates = []
     for date in dates:
         parsed_date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc)
-        formatted_date = parsed_date.strftime('%d/%m/%Y %Hh').astimezone(utc3)
+        formatted_date = parsed_date.astimezone(utc3).strftime('%d/%m/%Y %Hh')
         formatted_dates.append(formatted_date)
 
     make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
@@ -155,6 +154,9 @@ def previsao_gado():
     
     data = request.get_json()
 
+    utc = pytz.timezone('UTC') 
+    utc3 = pytz.timezone('America/Sao_Paulo')  
+
     city_name = data['cidade']
     initial_date = data['dateEntrada']
     final_date = data['dateSaida']
@@ -169,9 +171,11 @@ def previsao_gado():
     current_year = datetime.datetime.now().year
 
     initial_parsed_date = datetime.datetime.strptime(initial_date, '%d/%m %Hh').replace(year=current_year)
+    initial_parsed_date = initial_parsed_date.astimezone(utc3)
     startTime = initial_parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
 
     final_parsed_date = datetime.datetime.strptime(final_date, '%d/%m %Hh').replace(year=current_year)
+    final_parsed_date = final_parsed_date.astimezone(utc3)
     endTime = final_parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
 
     # Get latitude and longitude coordinates for city using OpenCage API
@@ -254,8 +258,8 @@ def previsao_gado():
     # Loop over the dates, parse them and format them
     formatted_dates = []
     for date in dates:
-        parsed_date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
-        formatted_date = parsed_date.strftime('%d/%m/%Y %Hh')
+        parsed_date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=utc)
+        formatted_date = parsed_date.astimezone(utc3).strftime('%d/%m/%Y %Hh')
         formatted_dates.append(formatted_date)
 
     # make_plots(dates, temperatures, pop, rain, city_name)
