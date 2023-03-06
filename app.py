@@ -19,10 +19,14 @@ def previsao_cafe():
     
     data = request.get_json()
 
+    utc = pytz.timezone('UTC') 
+    utc3 = pytz.timezone('America/Sao_Paulo')  
+    
     city_name = data['cidade']
     initial_date = data['dateEntrada']
     final_date = data['dateSaida']
     timesteps = '1h'
+
 
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key
@@ -30,8 +34,6 @@ def previsao_cafe():
 
     # Get the current year
     current_year = datetime.datetime.now().year
-
-    utc3 = pytz.timezone('America/Sao_Paulo')  
 
     initial_parsed_date = datetime.datetime.strptime(initial_date, '%d/%m %Hh').replace(year=current_year)
     initial_parsed_date = initial_parsed_date.astimezone(utc3)
