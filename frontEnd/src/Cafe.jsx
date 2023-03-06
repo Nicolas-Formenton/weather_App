@@ -106,7 +106,8 @@ const exibirBarraSuperiorHome = false;
   }
   else if(destination == "apiCafe"){
     return <ApiCafe/>;
-  }if (destination === "cafe") {
+  }
+  if (destination === "cafe") {
     return <Cafe />;
   }
   else if (destination === "gado") {
