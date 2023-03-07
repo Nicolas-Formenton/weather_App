@@ -56,8 +56,7 @@ function Cafe() {
           body: JSON.stringify({
             cidade,
             dateEntrada,
-            dateSaida,
-            timesteps
+            dateSaida
           })
         })
         .then(response => response.json())
@@ -90,7 +89,9 @@ function Cafe() {
   };
 
   const handleButtonForward = () => {
-    setDestination("apiCafe")
+    // SEM O PREVENT DEFAULT NAO PUXA DA API
+    preventDefault();
+    setDestination("apiCafe");
   };
 
 //MenuBar barras
@@ -102,7 +103,7 @@ const exibirBarraSuperiorHome = false;
 
 
   if (destination === "back") {
-   return <Page2 />;
+    return <Page2 />;
   }
   else if(destination == "apiCafe"){
     return <ApiCafe/>;
@@ -119,7 +120,7 @@ const exibirBarraSuperiorHome = false;
   }
   else{
   return (
-    <form action = "/apiCafe" method="post" className='divInput'  onSubmit={handleSubmit}>
+    <form className='divInput'  onSubmit={handleSubmit}>
         <button className='btnback' onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave} onClick={handleButtonBack}><svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
         <input className='inputpage3' type="text" name="inputName" placeholder='PRODUTO'/>
@@ -135,7 +136,6 @@ const exibirBarraSuperiorHome = false;
         </div>
         <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
             onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
-        {/* <MenuBar exibirBarraSuperiorRelatorio={exibirBarraSuperiorRelatorio} exibirBarraSuperiorCafe={exibirBarraSuperiorCafe} exibirBarraSuperiorGado={exibirBarraSuperiorGado}/> */}
 
 
 
@@ -147,7 +147,6 @@ const exibirBarraSuperiorHome = false;
 
 
 {/* AQUI É A  MENUBAR */}
-
         <div className='barra'>
         <div>
         {exibirBarraSuperiorHome && <div className="barraSuperiorHome" ></div>}

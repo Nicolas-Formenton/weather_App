@@ -57,8 +57,7 @@ function Gado() {
           body: JSON.stringify({
             cidade,
             dateEntrada,
-            dateSaida,
-            timesteps
+            dateSaida
           })
         })
         .then(response => response.json())
@@ -68,60 +67,62 @@ function Gado() {
 
 
 
- //Ativação e desativação das paginas
- const [destination, setDestination] = useState("");
+  //Ativação e desativação das paginas
+  const [destination, setDestination] = useState("");
 
- const handleButtonCafe = () => {
-   setDestination("cafe");
- };
+  const handleButtonCafe = () => {
+    setDestination("cafe");
+  };
 
- const handleButtonGado = () => {
-   setDestination("gado");
- };
+  const handleButtonGado = () => {
+    setDestination("gado");
+  };
 
- const handleButtonPage2 = () => {
-   setDestination("page2");
- };
+  const handleButtonPage2 = () => {
+    setDestination("page2");
+  };
 
- const handleButtonRelatorio = () => {
-   setDestination("relatorio");
- };
+  const handleButtonRelatorio = () => {
+    setDestination("relatorio");
+  };
 
- const handleButtonBack = () => {
-   setDestination("back");
- };
+  const handleButtonBack = () => {
+    setDestination("back");
+  };
 
- const handleButtonForward = () => {
-   setDestination("apiCafe")
- };
+  const handleButtonForward = () => {
+    // SEM O PREVENT DEFAULT NAO FUNCIONA A API
+    preventDefault();
+    setDestination("apiGado");
+  };
 
-//MenuBar barras
-const exibirBarraSuperiorRelatorio = false;
-const exibirBarraSuperiorCafe = false;
-const exibirBarraSuperiorGado = true;
-const exibirBarraSuperiorHome = false;
+  //MenuBar barras
+  const exibirBarraSuperiorRelatorio = false;
+  const exibirBarraSuperiorCafe = false;
+  const exibirBarraSuperiorGado = true;
+  const exibirBarraSuperiorHome = false;
 
 
 
- if (destination === "back") {
+  if (destination === "back") {
   return <Page2 />;
- }
- else if(destination == "apiCafe"){
-   return <ApiCafe/>;
- }
- if (destination === "cafe") {
-   return <Cafe />;
- }
- else if (destination === "gado") {
-   return <Gado />;
- }else if (destination === "page2") {
-   return <Page2 />;
- }else if (destination === "relatorio") {
-   return <Relatorio />;
- }
+  }
+  else if(destination == "apiGado"){
+    return <ApiGado/>;
+  }
+  if (destination === "cafe") {
+    return <Cafe />;
+  }
+  else if (destination === "gado") {
+    return <Gado />;
+  }else if (destination === "page2") {
+    return <Page2 />;
+  }else if (destination === "relatorio") {
+    return <Relatorio />;
+  }
   else{
   return (
-    <form action = "/apiGado" method="post" className='divInput formgado'  onSubmit={handleSubmit}>
+    <form className='divInput formgado'  onSubmit={handleSubmit}>
         <button className='btnback' onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave} onClick={handleButtonBack}><svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
         <input className='inputpage3' type="text" name="inputName" placeholder='NOME'/>
@@ -140,7 +141,6 @@ const exibirBarraSuperiorHome = false;
 
 
         {/* AQUI É A  MENUBAR */}
-
         <div className='barra'>
         <div>
         {exibirBarraSuperiorHome && <div className="barraSuperiorHome" ></div>}
