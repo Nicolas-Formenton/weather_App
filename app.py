@@ -1,15 +1,14 @@
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 import requests
-import json
 import config
 import datetime
 import pytz
 from plots import make_plots
 
 app = Flask(__name__)
-CORS(app,  origins=['http://localhost:5173'])
+CORS(app)
 
 @app.route('/dadosCafe', methods=['POST'])
 def previsao_cafe():

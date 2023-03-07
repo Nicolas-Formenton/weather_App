@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import apiPages from './style/ApiPages.css';
+import './style/ApiPages.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
 import ApiGado from './Gado2'
