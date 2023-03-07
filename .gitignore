@@ -1,4 +1,5 @@
 geo_data.json
 config.py
 __pycache__/.*
-data.json
+data_cafe.json
+data_gado.json

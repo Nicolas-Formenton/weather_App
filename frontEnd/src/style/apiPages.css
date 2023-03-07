@@ -1,0 +1,36 @@
+.btnback{
+    background: none;
+    height: 27px;
+    position: absolute;
+    left: 70px;
+    top: 45px;
+    border: none;
+    transition: transform 0.1s ease-in-out;
+}
+
+.svgarrowleft{
+    width: 30px;
+    fill: white;
+    transition: transform 0.1s ease-in-out;
+    stroke: white;
+}
+
+.ajustebtnback{
+    position: relative;
+}
+
+ul {
+    display: inline-table;
+    position: relative;
+    margin-top: 10%;
+    left: 5%;
+    border: 2px solid #204b5e;
+    padding: 10px;
+    border-radius: 8px;
+    border-spacing: 50%;
+    list-style: none;
+}
+
+.loadingdata {
+    margin-top: 30px;
+}

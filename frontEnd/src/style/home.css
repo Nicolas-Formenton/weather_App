@@ -1,22 +1,32 @@
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 h2 {
     margin: 0;
+    color: #204b5e;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.4;
 }
 
 
 .RetanguloPai {
-    background-image: url("./img/splashScreen.png");
+    background: #e4ebf0;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
     border: 2px solid black;
-    border-radius: 8px;
-
-    height: 768px;
-    width: 512px;
-
+    height: 920px;
+    width: 578px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: auto;
+    color: #204b5e;
 }
 
 .page1{
@@ -43,4 +53,16 @@ h2 {
     margin-bottom: 30px;
 }
 
+::-webkit-scrollbar{
+    width: 5px;
+}
 
+::-webkit-scrollbar-thumb {
+    background: #204b5e;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e4ebf0;
+    border-radius: 20px;
+}

@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    background-image: url("./img/splashScreen.png");
+    background-color: #e4ebf0;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
