@@ -53,8 +53,17 @@ function Page2() {
     setDestination("apiCafe");
   };
 
+    // Fazer o DropDown aparecer
+
+    const [showComponent, setShowComponent] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    
+    // Fazer o DropDown aparecer
+    setShowComponent(true);
+
     // loop p ver no console o que está saindo do submit
     const formData = new FormData(e.target);
     const data = {};
@@ -80,6 +89,8 @@ function Page2() {
     .catch(error => console.error(error));
   };
 
+
+
   //MenuBar barras
   const exibirBarraSuperiorRelatorio = false;
   const exibirBarraSuperiorCafe = false;
@@ -92,7 +103,15 @@ function Page2() {
     return <Gado />;
   } else if (destination === "page2") {
     return <Page2 />;
-  } else if (destination === "relatorio") {
+  } 
+  
+  
+  // else if(destination === "apiCafe"){
+  //   return <ApiCafe/>;
+  // } 
+  
+  
+  else if (destination === "relatorio") {
     return <Relatorio />;
   } else {
     return (
@@ -131,7 +150,7 @@ function Page2() {
           SUBMIT
         </button>
 
-        <DropDown />
+        {showComponent && <DropDown />}
         </form>
 
         

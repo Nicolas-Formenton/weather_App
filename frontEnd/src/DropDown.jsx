@@ -2,16 +2,36 @@ import dropDown from './style/dropDown.css'
 import { useState } from "react";
 function DropDown() {
   
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleDropdownClick = () => {
+        setIsOpen(!isOpen);
+      };
+
+
+
     return (
-        <div>
-        <select id="city">
-          <option disabled>Temperatura (C°)</option>
-          <option disabled>Umidade (%)</option>
-          <option disabled>Velocidade do Vento</option>
-          <option disabled>Belo Horizonte</option>
-        </select>
-      </div>
+
+    <div>
+        <div className="dropdown-container">
+            <div className="dropdown">
+            <button className="dropdown-button" onClick={handleDropdownClick}>
+                Selecionar
+            </button>
+            {isOpen && (
+                <div className="dropdown-items">
+                <a onClick={() => handleItemClick("Item 1")}>Item 1</a>
+                <a onClick={() => handleItemClick("Item 2")}>Item 2</a>
+                <a onClick={() => handleItemClick("Item 3")}>Item 3</a>
+                </div>
+            )}
+            </div>
+        </div>
+    </div>
+    
     );
-}
+  }
+
+
 
 export default DropDown;

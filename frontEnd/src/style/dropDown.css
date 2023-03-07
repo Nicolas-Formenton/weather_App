@@ -1,0 +1,120 @@
+.divSelects{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+
+.selectTemp{
+    width: 60%;
+  height: 45px;
+  background: #204b5e;
+  border: 1px solid black;
+    border-radius: 8px 8px 0 0px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  margin-top: 90px;
+}
+
+.selectTemp:focus {
+    outline: none; /* remove a borda que aparece ao clicar */
+    background-color: #204b5e; /* volta à cor de fundo original */
+}
+
+
+.selectUmidade{
+    width: 60%;
+  height: 45px;
+  background: #204b5e;
+  border: 1px solid black;
+ border-radius: 8px 8px 0 0px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  margin-top: 45px;
+}
+
+.selectUmidade:focus {
+    outline: none; /* remove a borda que aparece ao clicar */
+    background-color: #204b5e; /* volta à cor de fundo original */
+}
+
+
+.selectVento{
+width: 60%;
+  height: 45px;
+  background: #204b5e;
+  border: 1px solid black;
+  border-radius: 8px 8px 0 0px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  margin-top: 45px;
+}
+
+.selectVento:focus {
+    outline: none; /* remove a borda que aparece ao clicar */
+    background-color: #204b5e; /* volta à cor de fundo original */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-button {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    background-color: #ccc;
+    cursor: pointer;
+  }
+  
+  .dropdown-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 1;
+  }
+  
+  .dropdown-items a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  select {
+    margin-left: 10px;
+  }
