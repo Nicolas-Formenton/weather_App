@@ -133,7 +133,7 @@ def previsao_cafe():
         formatted_date = parsed_date.astimezone(utc3).strftime('%d/%m/%Y %Hh')
         formatted_dates.append(formatted_date)
 
-    make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
+    # make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
 
     return data
 

@@ -61,8 +61,6 @@ function Gado() {
   };
   
   const handleButtonForward = () => {
-    // SEM O PREVENT DEFAULT NAO FUNCIONA A API
-    preventDefault();
     setDestination("apiGado");
   };
 
@@ -103,7 +101,7 @@ function Gado() {
   if (destination === "back") {
     return <Page2 />;
   }
-  else if(destination == "apiGado"){
+  else if(destination === "apiGado"){
     return <ApiGado/>;
   }
   if (destination === "cafe") {

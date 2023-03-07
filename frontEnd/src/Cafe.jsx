@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import page3 from './style/page3.css';
+import './style/page3.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
 import ApiCafe from './Cafe2';
@@ -60,8 +60,6 @@ function Cafe() {
   };
 
   const handleButtonForward = () => {
-    // SEM O PREVENT DEFAULT NAO PUXA DA API
-    preventDefault();
     setDestination("apiCafe");
   };
 
@@ -102,7 +100,7 @@ function Cafe() {
   if (destination === "back") {
     return <Page2 />;
   }
-  else if(destination == "apiCafe"){
+  else if(destination === "apiCafe"){
     return <ApiCafe/>;
   }
   if (destination === "cafe") {
