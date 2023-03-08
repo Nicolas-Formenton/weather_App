@@ -4,6 +4,7 @@ import Cafe from "./Cafe";
 import Gado from "./Gado";
 import Relatorio from "./Relatorio";
 import MenuBar from "./menubar";
+import logo from './style/img/logo.png';
 import DropDown from "./DropDown";
 import DropDown2 from "./DropDown2";
 import DropDown3 from "./DropDown3";
@@ -67,14 +68,14 @@ function Page2() {
     e.preventDefault();
 
     
-    // Fazer o DropDown aparecer
-    setShowComponent(true);
+  // Fazer o DropDown aparecer
+  setShowComponent(true);
 
-     // Fazer o DropDown2 aparecer
-     setShowComponent2(true);
+  // Fazer o DropDown2 aparecer
+  setShowComponent2(true);
 
- // Fazer o DropDown3 aparecer
- setShowComponent3(true);
+  // Fazer o DropDown3 aparecer
+  setShowComponent3(true);
 
     // loop p ver no console o que está saindo do submit
     const formData = new FormData(e.target);
@@ -128,8 +129,13 @@ function Page2() {
   } else {
     return (
 
+    <div className="divscroll">
+
+     
       <div className="btnlista">
-        <form className='divInput'  onSubmit={handleSubmit}>
+        
+        <form className='divInputPage2'  onSubmit={handleSubmit}>
+        <img src={logo} alt="Logo" />
         <input
           className="inputCidade"
           type="text"
@@ -165,12 +171,10 @@ function Page2() {
         {showComponent && <DropDown />}
         {showComponent2 && <DropDown2 />}
         {showComponent3 && <DropDown3 />}
-        </form>
 
-        
-        {/* AQUI É A  MENUBAR */}
+               {/* AQUI É A  MENUBAR */}
 
-        <div className="barra">
+       <div className="barra">
           <div>
             {exibirBarraSuperiorHome && (
               <div className="barraSuperiorHome"></div>
@@ -320,7 +324,13 @@ function Page2() {
             </button>
           </div>
         </div>
+        </form>
+
+        
+
       </div>
+       
+    </div>
     );
   }
 }

@@ -119,6 +119,7 @@ width: 60%;
     border: 1px solid #204b5e;
     border-radius: 0px 0px 8px 8px;
     border-top: none;
+    animation: slide-down 0.5s ease-out;
   }
   
   .dropdown-items a {
@@ -130,4 +131,16 @@ width: 60%;
   
   select {
     margin-left: 10px;
+  }
+
+
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
