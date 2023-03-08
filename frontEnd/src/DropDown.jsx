@@ -1,36 +1,71 @@
-import dropDown from './style/dropDown.css'
-import { useState } from "react";
+import './style/dropDown.css'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 function DropDown() {
   
     const [isOpen, setIsOpen] = useState(false);
+    const [data, setData] = useState('');
 
+    
     const handleDropdownClick = () => {
         setIsOpen(!isOpen);
-      };
+    };
+    
+    useEffect(() => {
+      axios.get('http://127.0.0.1:5000/apiCafe')
+        .then(response => {
+          setData(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }, []);
 
-
-
-    return (
-
-    <div className='divDropDownPai'>
-        <div className="dropdown-container">
-            <div className="dropdown">
-            <button className="dropdown-button" onClick={handleDropdownClick}>
+    if(!data){
+        return (
+        <div className='divDropDownPai'>
+            <div className="dropdown-container">
+                <div className="dropdown">
+                <button className="dropdown-button" onClick={handleDropdownClick}>
                 Temperatura (C°)
-            </button>
-            {isOpen && (
-                <div className="dropdown-items">
-                <a onClick={() => handleItemClick("Item 1")}>Item 1</a>
-                <a onClick={() => handleItemClick("Item 2")}>Item 2</a>
-                <a onClick={() => handleItemClick("Item 3")}>Item 3</a>
+                </button>
+                {isOpen && (
+                    <div className="dropdown-items">
+                    <a onClick={() => handleItemClick2("Item")}>Item</a>
+                    </div>
+                )}
                 </div>
-            )}
             </div>
         </div>
-    </div>
-    
-    );
-  }
+        );
+    }
+    else{
+        return (
+            <div className='divDropDownPai'>
+                <div className="dropdown-container">
+                {data.data.timelines.map((timeline, timelineIndex) => (
+                    <div key={timelineIndex}>
+                    {timeline.intervals.map((interval, intervalIndex) => {
+                        return (
+                        <div className="dropdown" key={intervalIndex}>
+                            <button className="dropdown-button" onClick={handleDropdownClick}>
+                            Temperatura ({interval.values.temperature} C°)
+                            </button>
+                            {isOpen && (
+                            <div className="dropdown-items">
+                                <a onClick={() => handleItemClick("Item")}>Item</a>
+                            </div>
+                            )}
+                        </div>
+                        );
+                    })}
+                    </div>
+                ))}
+                </div>
+            </div>
+            );
+    }
+}
 
 
 
