@@ -13,6 +13,16 @@ function Page2() {
 
   const [cidade, setCidade] = useState('');
 
+  const handleMouseClickIn = () => {
+    const btnopcao = document.querySelector(".efeitoClick");
+    btnopcao.style.transform = "translateY(3px)";
+  };
+
+  const handleMouseClickOut = () => {
+    const btnopcao = document.querySelector(".efeitoClick");
+    btnopcao.style.transform = "translateY(0px)";
+  };
+
   //Ativação e desativação das paginas
   const [destination, setDestination] = useState("");
 
