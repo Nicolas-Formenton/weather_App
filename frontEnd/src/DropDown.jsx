@@ -41,29 +41,23 @@ function DropDown() {
     }
     else{
         return (
-            <div className='divDropDownPai'>
-                <div className="dropdown-container">
-                {data.map((timeline, timelineIndex) => (
-                    <div key={timelineIndex}>
-                    {timeline.intervals.map((interval, intervalIndex) => {
-                        return (
-                        <div className="dropdown" key={intervalIndex}>
-                            <button className="dropdown-button" onClick={handleDropdownClick}>
-                            Temperatura ({interval.values.temperature} C°)
-                            </button>
-                            {isOpen && (
-                            <div className="dropdown-items">
-                                <a onClick={() => handleItemClick("Item")}>Item</a>
-                            </div>
-                            )}
+        <div className='divDropDownPai'>
+            <div className="dropdown-container">
+                <div>
+                    <div className="dropdown">
+                        <button className="dropdown-button" onClick={handleDropdownClick}>
+                        Temperatura ({data.data.values.temperature} C°)
+                        </button>
+                        {isOpen && (
+                        <div className="dropdown-items">
+                            <a onClick={() => handleItemClick("Item")}>Item</a>
                         </div>
-                        );
-                    })}
+                        )}
                     </div>
-                ))}
                 </div>
             </div>
-            );
+        </div>
+        );
     }
 }
 
