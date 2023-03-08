@@ -12,11 +12,11 @@ function DropDown() {
 
     return (
 
-    <div>
+    <div className='divDropDownPai'>
         <div className="dropdown-container">
             <div className="dropdown">
             <button className="dropdown-button" onClick={handleDropdownClick}>
-                Selecionar
+                Temperatura (C°)
             </button>
             {isOpen && (
                 <div className="dropdown-items">
