@@ -10,6 +10,11 @@ import DropDown2 from "./DropDown2";
 import DropDown3 from "./DropDown3";
 
 function Page2() {
+
+  const [cidade, setCidade] = useState('');
+  const [dateEntrada, setDateEntrada] = useState('');
+  const [dateSaida, setDateSaida] = useState('');
+
   //EFEITO CLICK CAFE
   const handleMouseClickIn = () => {
     const btnopcao = document.querySelector(".efeitoClick");
@@ -67,15 +72,14 @@ function Page2() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
-  // Fazer o DropDown aparecer
-  setShowComponent(true);
+    // Fazer o DropDown aparecer
+    setShowComponent(true);
 
-  // Fazer o DropDown2 aparecer
-  setShowComponent2(true);
+    // Fazer o DropDown2 aparecer
+    setShowComponent2(true);
 
-  // Fazer o DropDown3 aparecer
-  setShowComponent3(true);
+    // Fazer o DropDown3 aparecer
+    setShowComponent3(true);
 
     // loop p ver no console o que está saindo do submit
     const formData = new FormData(e.target);
@@ -140,7 +144,8 @@ function Page2() {
           className="inputCidade"
           type="text"
           name="Cidade"
-          placeholder="Cidade..."
+          placeholder="Cidade..." 
+          value = {cidade} onChange={(e) => setCidade(e.target.value)}
         />
         <div class="dates">
           <input
@@ -148,6 +153,7 @@ function Page2() {
             type="text"
             name="inputDateInicial"
             placeholder="DIA/MES HORA"
+            value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)}
           />
           <div class="date_between"></div>
           <input
@@ -155,6 +161,7 @@ function Page2() {
             type="text"
             name="inputDateFinal"
             placeholder="DIA/MES HORA"
+            value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}
           />
         </div>
 
@@ -325,9 +332,6 @@ function Page2() {
           </div>
         </div>
         </form>
-
-        
-
       </div>
        
     </div>
