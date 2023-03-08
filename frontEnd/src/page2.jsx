@@ -12,31 +12,6 @@ import DropDown3 from "./DropDown3";
 function Page2() {
 
   const [cidade, setCidade] = useState('');
-  const [dateEntrada, setDateEntrada] = useState('');
-  const [dateSaida, setDateSaida] = useState('');
-
-  //EFEITO CLICK CAFE
-  const handleMouseClickIn = () => {
-    const btnopcao = document.querySelector(".efeitoClick");
-    btnopcao.style.transform = "translateY(3px)";
-  };
-
-  const handleMouseClickOut = () => {
-    const btnopcao = document.querySelector(".efeitoClick");
-    btnopcao.style.transform = "translateY(0px)";
-  };
-
-  //EFEITO CLICK GADO
-
-  const handleMouseClickIn4 = () => {
-    const btnopcao4 = document.querySelector(".efeitoClick4");
-    btnopcao4.style.transform = "translateY(3px)";
-  };
-
-  const handleMouseClickOut4 = () => {
-    const btnopcao4 = document.querySelector(".efeitoClick4");
-    btnopcao4.style.transform = "translateY(0px)";
-  };
 
   //Ativação e desativação das paginas
   const [destination, setDestination] = useState("");
@@ -90,15 +65,13 @@ function Page2() {
     console.log(JSON.stringify(data));
     
     // enviando dados do formulário pra api
-    fetch('http://127.0.0.1:5000/dadosCafe', {
+    fetch('http://127.0.0.1:5000/dadosRealtime', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cidade,
-        dateEntrada,
-        dateSaida
+        cidade
       })
     })
     .then(response => response.json())
@@ -147,23 +120,6 @@ function Page2() {
           placeholder="Cidade..." 
           value = {cidade} onChange={(e) => setCidade(e.target.value)}
         />
-        <div class="dates">
-          <input
-            className="inputDate"
-            type="text"
-            name="inputDateInicial"
-            placeholder="DIA/MES HORA"
-            value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)}
-          />
-          <div class="date_between"></div>
-          <input
-            className="inputDate"
-            type="text"
-            name="inputDateFinal"
-            placeholder="DIA/MES HORA"
-            value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}
-          />
-        </div>
 
         <button
           className="btnaddpage2"

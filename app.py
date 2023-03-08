@@ -10,6 +10,54 @@ from plots import make_plots
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/dadosRealtime', methods=['POST'])
+def realtime():
+    content_type = request.headers.get('Content-Type')
+    if content_type != 'application/json':
+        return jsonify({'error': 'Invalid Content-Type'}), 400
+    
+    data = request.get_json()
+
+    city_name = data['cidade']
+
+    # Replace with your API keys
+    opencage_api_key = config.opencage_api_key
+    tomorrow_api_key = config.tomorrow_api_key
+
+    # Get latitude and longitude coordinates for city using OpenCage API
+    opencage_endpoint = f"https://api.opencagedata.com/geocode/v1/json?q={city_name}&key={opencage_api_key}"
+    opencage_response = requests.get(opencage_endpoint)
+    opencage_data = json.loads(opencage_response.text)
+    latitude = opencage_data["results"][0]["geometry"]["lat"]
+    longitude = opencage_data["results"][0]["geometry"]["lng"]
+
+
+    tomorrow_endpoint = "https://api.tomorrow.io/v4/weather/realtime?" \
+                        "location={latitude},{longitude}" \
+                        "&apikey={tomorrow_api_key}" 
+
+
+    tomorrow_endpoint = tomorrow_endpoint.format(latitude=latitude,
+                                                longitude=longitude,
+                                                tomorrow_api_key=tomorrow_api_key)
+    
+    tomorrow_response = requests.get(tomorrow_endpoint)
+    tomorrow_data = json.loads(tomorrow_response.text)
+
+    # Dumps API data into .json
+    with open('realtime_data.json', 'w') as f:
+        json.dump(tomorrow_data, f)
+
+    return data
+
+@app.route("/apiRealtime", methods=['GET'])
+def api_realtime():
+    with open('realtime_data.json') as f:
+        data = json.load(f)
+
+    return jsonify(data)
+
+
 @app.route('/dadosCafe', methods=['POST'])
 def previsao_cafe():
     content_type = request.headers.get('Content-Type')

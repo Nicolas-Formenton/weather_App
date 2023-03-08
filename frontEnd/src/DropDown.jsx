@@ -12,7 +12,7 @@ function DropDown() {
     };
     
     useEffect(() => {
-      axios.get('http://127.0.0.1:5000/apiCafe')
+      axios.get('http://127.0.0.1:5000/apiRealtime')
         .then(response => {
           setData(response.data);
         })
@@ -43,7 +43,7 @@ function DropDown() {
         return (
             <div className='divDropDownPai'>
                 <div className="dropdown-container">
-                {data.data.timelines.map((timeline, timelineIndex) => (
+                {data.map((timeline, timelineIndex) => (
                     <div key={timelineIndex}>
                     {timeline.intervals.map((interval, intervalIndex) => {
                         return (
