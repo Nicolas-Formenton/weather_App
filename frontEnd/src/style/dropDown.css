@@ -8,7 +8,7 @@
 .divTempo{
   width: 165px;
   height: 60px;
-  background: #335c6c;
+  background: #204b5e;
   border: 1px solid black;
   border-radius: 8px;
   margin-bottom: 15px;
@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  justify-content: center;
 }
 
 

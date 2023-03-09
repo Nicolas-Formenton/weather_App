@@ -40,11 +40,11 @@ function DropDown() {
                 </div>
 
                 <div className="divTempo">
-                Sensação termica (C°)
+                Sensação Térmica (C°)
                 </div>
 
                 <div className="divTempo">
-                Velocidade do vento (KM/h)
+                Velocidade do Vento (Km/h)
                 </div>
 
             </div>
@@ -71,12 +71,12 @@ function DropDown() {
 
                 <div className="divTempo">
                 {/* <img className='imgsvg' src={sensaTemp}></img> */}
-                Sensação termica ({data.data.values.temperatureApparent} C°)
+                Sensação térmica ({data.data.values.temperatureApparent} C°)
                 </div>
 
                 <div className="divTempo">
                 {/* <img className='imgsvg' src={vento}></img> */}
-                Velocidade do vento ({data.data.values.windSpeed} KM/h)
+                Velocidade do Vento ({data.data.values.windSpeed} Km/h)
                 </div>
             </div>
         );

@@ -44,7 +44,7 @@ function Page2() {
     setDestination("apiCafe");
     const submitted = document.querySelector('.btnaddpage2')
     submitted.style.opacity = '0.7'
-    submitted.textContent = "SUBMITTED!";
+    submitted.textContent = "Submitted!";
   };
 
     // Fazer o DropDown aparecer
@@ -118,7 +118,7 @@ function Page2() {
           className="inputCidade"
           type="text"
           name="Cidade"
-          placeholder="Cidade..." 
+          placeholder="Localização" 
           value = {cidade} onChange={(e) => setCidade(e.target.value)}
         />
 
@@ -129,7 +129,7 @@ function Page2() {
           onMouseUp={handleMouseClickOut}
           onClick={handleButtonForward}
         >
-        SUBMIT
+        Submit
         </button>
 
         {showComponent && <DropDown />}
