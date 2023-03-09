@@ -64,12 +64,12 @@ input:focus {
 }
 
 .btnaddpage2{
-  width: 60%;
+  width: 35%;
   height: 45px;
   background: #204b5e;
   border: none;
   border-radius: 8px;
-  margin-top: 30px;
+  margin-top: 1px;
   box-sizing: border-box;
 }
 
