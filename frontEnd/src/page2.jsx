@@ -48,7 +48,7 @@ function Page2() {
 
     const [showComponent, setShowComponent] = useState(false);
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
 
     // Fazer o DropDown aparecer
@@ -110,7 +110,7 @@ function Page2() {
       <div className="btnlista">
         
         <form className='divInputPage2'  onSubmit={handleSubmit}>
-        <img src={logo} alt="Logo" />
+        <img className="imglogo" src={logo} alt="Logo" />
         <input
           className="inputCidade"
           type="text"
