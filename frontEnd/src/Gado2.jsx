@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import apiPages from './style/apiPages.css'
+import './style/apiPages.css'
 import Page2 from './page2';
 import Loading  from './loading'
+import FormatDate from './date';
+import { format } from 'date-fns';
+import Gado from './Gado'
 
 // API GADO RETRIEVE
 function ApiGado() {
@@ -40,7 +43,7 @@ function ApiGado() {
   };
 
   if (destination === "back") {
-    return <Page2 />;
+    return <Gado />;
   }
 
   if (!data) {
@@ -63,11 +66,10 @@ function ApiGado() {
       </button>
       {data.data.timelines.map((timeline, index) => (
         <div key={index}>
-          {/* <h2>{timeline.startTime} - {timeline.endTime}</h2> */}
           <div>
             {timeline.intervals.map((interval, index) => (           
               <ul key={index}>
-                <li>{interval.startTime}</li>
+                <li>{FormatDate(interval.startTime)}</li>
                 <li>Temperature: {interval.values.temperature}°C</li>
                 <li>Precipitation probability: {interval.values.precipitationProbability}%</li>
                 <li>Rain accumulation: {interval.values.rainAccumulation} mm/d</li>
