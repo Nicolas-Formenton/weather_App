@@ -42,6 +42,9 @@ function Page2() {
 
   const handleButtonForward = () => {
     setDestination("apiCafe");
+    const submitted = document.querySelector('.btnaddpage2')
+    submitted.style.opacity = '0.7'
+    submitted.textContent = "SUBMITTED!";
   };
 
     // Fazer o DropDown aparecer
@@ -126,7 +129,7 @@ function Page2() {
           onMouseUp={handleMouseClickOut}
           onClick={handleButtonForward}
         >
-          SUBMIT
+        SUBMIT
         </button>
 
         {showComponent && <DropDown />}
