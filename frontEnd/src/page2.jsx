@@ -6,7 +6,7 @@ import Relatorio from "./Relatorio";
 import MenuBar from "./menubar";
 import logo from './style/img/logo.png';
 import DropDown from "./DropDown";
-
+import local_icon from "./style/icons/local_icon.png"
 function Page2() {
 
   const [cidade, setCidade] = useState('');
@@ -113,7 +113,10 @@ function Page2() {
       <div className="btnlista">
         
         <form className='divInputPage2'  onSubmit={handleSubmit}>
+        
         <img className="imglogo" src={logo} alt="Logo" />
+        <div className="divlocalizacao">
+          <img className="iconloc" src={local_icon}></img>
         <input
           className="inputCidade"
           type="text"
@@ -121,7 +124,7 @@ function Page2() {
           placeholder="Localização" 
           value = {cidade} onChange={(e) => setCidade(e.target.value)}
         />
-
+        </div>
         <button
           className="btnaddpage2"
           type="submit"
