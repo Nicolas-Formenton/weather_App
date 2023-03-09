@@ -1,15 +1,17 @@
 import './style/dropDown.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import temp from './style/img/temp.svg'
+import umidade from './style/img/umidade.svg'
+import probChuva from './style/img/probChuva.svg'
+import sensaTemp from './style/img/sensaTerm.svg'
+import vento from './style/img/vento.svg'
+
+
 function DropDown() {
   
-    const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState('');
 
-    
-    const handleDropdownClick = () => {
-        setIsOpen(!isOpen);
-    };
     
     useEffect(() => {
       axios.get('http://127.0.0.1:5000/apiRealtime')
@@ -23,40 +25,60 @@ function DropDown() {
 
     if(!data){
         return (
-        <div className='divDropDownPai'>
-            <div className="dropdown-container">
-                <div className="dropdown">
-                <button className="dropdown-button" onClick={handleDropdownClick}>
+            <div className='divSelects'>
+
+                <div className="divTempo">
                 Temperatura (C°)
-                </button>
-                {isOpen && (
-                    <div className="dropdown-items">
-                    <a onClick={() => handleItemClick2("Item")}>Item</a>
-                    </div>
-                )}
                 </div>
+
+                <div className="divTempo">
+                Umidade (%)
+                </div>
+
+                <div className="divTempo">
+                Probabilidade de Chuva (%)
+                </div>
+
+                <div className="divTempo">
+                Sensação termica (C°)
+                </div>
+
+                <div className="divTempo">
+                Velocidade do vento (KM/h)
+                </div>
+
             </div>
-        </div>
         );
     }
     else{
         return (
-        <div className='divDropDownPai'>
-            <div className="dropdown-container">
-                <div>
-                    <div className="dropdown">
-                        <button className="dropdown-button" onClick={handleDropdownClick}>
-                        Temperatura ({data.data.values.temperature} C°)
-                        </button>
-                        {isOpen && (
-                        <div className="dropdown-items">
-                            <a onClick={() => handleItemClick("Item")}>Item</a>
-                        </div>
-                        )}
-                    </div>
+            <div className='divSelects'>
+
+                <div className="divTempo">
+                <img className='imgsvg' src={temp}></img>
+                Temperatura ({data.data.values.temperature} C°)
+                </div>
+                
+                <div className="divTempo">
+                <img className='imgsvg' src={umidade}></img>
+                Umidade ({data.data.values.humidity} %)
+                </div>
+
+                <div className="divTempo">
+                <img className='imgsvg' src={probChuva}></img>
+                Probabilidade de Chuva ({data.data.values.precipitationProbability} %)
+                </div>
+
+                <div className="divTempo">
+                <img className='imgsvg' src={sensaTemp}></img>
+                Sensação termica ({data.data.values.temperatureApparent} C°)
+                </div>
+
+                <div className="divTempo">
+                <img className='imgsvg' src={vento}></img>
+                Velocidade do vento ({data.data.values.windSpeed} KM/h)
                 </div>
             </div>
-        </div>
         );
     }
 }

@@ -6,8 +6,6 @@ import Relatorio from "./Relatorio";
 import MenuBar from "./menubar";
 import logo from './style/img/logo.png';
 import DropDown from "./DropDown";
-import DropDown2 from "./DropDown2";
-import DropDown3 from "./DropDown3";
 
 function Page2() {
 
@@ -50,21 +48,11 @@ function Page2() {
 
     const [showComponent, setShowComponent] = useState(false);
 
-    const [showComponent2, setShowComponent2] = useState(false);
-
-    const [showComponent3, setShowComponent3] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Fazer o DropDown aparecer
     setShowComponent(true);
-
-    // Fazer o DropDown2 aparecer
-    setShowComponent2(true);
-
-    // Fazer o DropDown3 aparecer
-    setShowComponent3(true);
 
     // loop p ver no console o que está saindo do submit
     const formData = new FormData(e.target);
@@ -142,8 +130,6 @@ function Page2() {
         </button>
 
         {showComponent && <DropDown />}
-        {showComponent2 && <DropDown2 />}
-        {showComponent3 && <DropDown3 />}
 
                {/* AQUI É A  MENUBAR */}
 
