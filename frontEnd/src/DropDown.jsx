@@ -55,27 +55,27 @@ function DropDown() {
             <div className='divSelects'>
 
                 <div className="divTempo">
-                <img className='imgsvg' src={temp}></img>
+                {/* <img className='imgsvg' src={temp}></img> */}
                 Temperatura ({data.data.values.temperature} C°)
                 </div>
                 
                 <div className="divTempo">
-                <img className='imgsvg' src={umidade}></img>
+                {/* <img className='imgsvg' src={umidade}></img> */}
                 Umidade ({data.data.values.humidity} %)
                 </div>
 
                 <div className="divTempo">
-                <img className='imgsvg' src={probChuva}></img>
+                {/* <img className='imgsvg' src={probChuva}></img> */}
                 Probabilidade de Chuva ({data.data.values.precipitationProbability} %)
                 </div>
 
                 <div className="divTempo">
-                <img className='imgsvg' src={sensaTemp}></img>
+                {/* <img className='imgsvg' src={sensaTemp}></img> */}
                 Sensação termica ({data.data.values.temperatureApparent} C°)
                 </div>
 
                 <div className="divTempo">
-                <img className='imgsvg' src={vento}></img>
+                {/* <img className='imgsvg' src={vento}></img> */}
                 Velocidade do vento ({data.data.values.windSpeed} KM/h)
                 </div>
             </div>
