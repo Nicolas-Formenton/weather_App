@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import apiPages from './style/apiPages.css'
+import './style/apiPages.css'
 import Page2 from './page2';
 import Loading  from './loading'
+import FormatDate from './date';
+import { format } from 'date-fns';
+import Cafe from './Cafe';
+
 // API CAFE RETRIEVE
 function ApiCafe() {
   const [data, setData] = useState('');
@@ -40,7 +44,7 @@ function ApiCafe() {
   };
 
   if (destination === "back") {
-    return <Page2 />;
+    return <Cafe />;
   }
 
   if (!data) {    
@@ -67,7 +71,7 @@ function ApiCafe() {
           <div>
             {timeline.intervals.map((interval, index) => (
               <ul key={index}>
-                <li>{interval.startTime}</li>
+                <li>{FormatDate(interval.startTime)}</li>
                 <li>Temperature: {interval.values.temperature}°C</li>
                 <li>Humidity: {interval.values.humidity}%</li>
                 <li>Wind speed: {interval.values.windSpeed} km/h</li>

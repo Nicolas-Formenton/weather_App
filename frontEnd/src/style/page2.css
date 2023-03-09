@@ -44,7 +44,7 @@ input:focus {
 
 .dates {
   display: flex;
-  width: 60% !important;
+  width: 70%;
 }
 
 .date_between {

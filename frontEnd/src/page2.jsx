@@ -133,7 +133,7 @@ function Page2() {
 
                {/* AQUI É A  MENUBAR */}
 
-       <div className="barra">
+      <div className="barra">
           <div>
             {exibirBarraSuperiorHome && (
               <div className="barraSuperiorHome"></div>
@@ -285,7 +285,6 @@ function Page2() {
         </div>
         </form>
       </div>
-       
     </div>
     );
   }

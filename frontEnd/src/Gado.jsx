@@ -126,9 +126,9 @@ function Gado() {
           <input className='inputpage3' type="text" name="inputObs" placeholder='OBSERVAÇÃO'/>
           <input className='inputpage3' type="text" name="inputCity" placeholder='CIDADE' value = {cidade} onChange={(e) => setCidade(e.target.value)}/>
           <div class='dates'>
-            <input className='inputpage3' type="text" name="inputDateInicial" placeholder="DD/MM HH" value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />
+            <input className='inputpage3' type="text" name="inputDateInicial" placeholder="DIA/MES HORA" value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />
             <div class='date_between'></div>
-            <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DD/MM HH" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
+            <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DIA/MES HORA" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
           </div>
           <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
               onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
