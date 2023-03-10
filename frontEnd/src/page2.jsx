@@ -6,7 +6,8 @@ import Relatorio from "./Relatorio";
 import MenuBar from "./menubar";
 import logo from './style/img/logo.png';
 import DropDown from "./DropDown";
-import local_icon from "./style/icons/local_icon.png"
+import local_icon from "./style/icons/local_icon.png";
+
 function Page2() {
 
   const [cidade, setCidade] = useState('');

@@ -6,6 +6,7 @@ import ApiGado from './Gado2'
 import Cafe from './Cafe'
 import Relatorio from './Relatorio'
 import MenuBar from './menubar'
+import axios from 'axios';
 
 function Gado() {
 
@@ -59,10 +60,6 @@ function Gado() {
   const handleButtonBack = () => {
     setDestination("back");
   };
-  
-  const handleButtonForward = () => {
-    setDestination("apiGado");
-  };
 
   //MenuBar barras
   const exibirBarraSuperiorRelatorio = false;
@@ -71,7 +68,7 @@ function Gado() {
   const exibirBarraSuperiorHome = false;
   
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
     // loop p ver no console o que está saindo do submit
     const formData = new FormData(e.target);
     const data = {};
@@ -81,20 +78,20 @@ function Gado() {
     console.log(JSON.stringify(data));
     
     // enviando dados do formulário pra api
-    fetch('http://127.0.0.1:5000/dadosGado', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        cidade,
-        dateEntrada,
-        dateSaida
-      })
+    axios.post('http://127.0.0.1:5000/dadosGado', {
+    cidade,
+    dateEntrada,
+    dateSaida
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    .then(response => {
+      console.log(response.data);
+      setDestination("apiGado");
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+
   };
 
 
@@ -120,7 +117,8 @@ function Gado() {
     return (
       <form className='divInput formgado'  onSubmit={handleSubmit}>
           <button className='btnback' onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave} onClick={handleButtonBack}><svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
+              onMouseLeave={handleMouseLeave} onClick={handleButtonBack}>
+                <svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
           <input className='inputpage3' type="text" name="inputName" placeholder='NOME'/>
           <input className='inputpage3' type="text" name="inputCabecas" placeholder='CABEÇAS DE GADO'/>
           <input className='inputpage3' type="text" name="inputObs" placeholder='OBSERVAÇÃO'/>
@@ -130,8 +128,11 @@ function Gado() {
             <div class='date_between'></div>
             <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DIA/MES HORA" value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
           </div>
-          <button className='btnaddproduto' type='submit'  onMouseDown={handleMouseClickIn}
-              onMouseUp={handleMouseClickOut} onClick={handleButtonForward}>SUBMIT</button>
+          <button className='btnaddproduto' 
+                  type='submit'  
+                  onMouseDown={handleMouseClickIn}
+                  onMouseUp={handleMouseClickOut}
+                  >SUBMIT</button>
 
 
 
