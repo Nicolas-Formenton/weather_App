@@ -9,7 +9,9 @@ import MenuBar from './menubar'
 import axios from 'axios';
 
 function Gado() {
-
+  const [nome, setNome] = useState('');
+  const [cabeças, setCabeças] = useState('');
+  const [obs, setObs] = useState('');
   const [cidade, setCidade] = useState('');
   const [dateEntrada, setDateEntrada] = useState('');
   const [dateSaida, setDateSaida] = useState('');
@@ -79,6 +81,9 @@ function Gado() {
     
     // enviando dados do formulário pra api
     axios.post('http://127.0.0.1:5000/dadosGado', {
+    nome,
+    cabeças,
+    obs,
     cidade,
     dateEntrada,
     dateSaida
@@ -119,9 +124,15 @@ function Gado() {
           <button className='btnback' onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave} onClick={handleButtonBack}>
                 <svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
-          <input className='inputpage3' type="text" name="inputName" placeholder='NOME'/>
-          <input className='inputpage3' type="text" name="inputCabecas" placeholder='CABEÇAS DE GADO'/>
-          <input className='inputpage3' type="text" name="inputObs" placeholder='OBSERVAÇÃO'/>
+          <input className='inputpage3' type="text" name="inputName" placeholder='NOME'
+          value = {nome} onChange={(e) => setNome(e.target.value)}/>
+
+          <input className='inputpage3' type="text" name="inputCabecas" placeholder='CABEÇAS DE GADO'
+          value = {cabeças} onChange={(e) => setCabeças(e.target.value)}/>
+
+          <input className='inputpage3' type="text" name="inputObs" placeholder='OBSERVAÇÃO'
+          value = {obs} onChange={(e) => setObs(e.target.value)}/>
+
           <input className='inputpage3' type="text" name="inputCity" placeholder='CIDADE' value = {cidade} onChange={(e) => setCidade(e.target.value)}/>
           <div class='dates'>
             <input className='inputpage3' type="text" name="inputDateInicial" placeholder="DIA/MES HORA" value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />

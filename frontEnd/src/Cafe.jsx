@@ -8,10 +8,15 @@ import Relatorio from './Relatorio'
 import axios from 'axios';
 
 function Cafe() {
-
+  
   const [cidade, setCidade] = useState('');
   const [dateEntrada, setDateEntrada] = useState('');
   const [dateSaida, setDateSaida] = useState('');
+  const [produto, setProduto] = useState('');
+  const [quantidade, setQuantidade] = useState('');
+  const [dosagem, setDosagem] = useState('');
+  const [velocidade, setVelocidade] = useState('');
+
 
   //EFEITO CLICK BTNADDPRODUTO
   const handleMouseClickIn = () => {
@@ -72,6 +77,10 @@ function Cafe() {
     
     // enviando dados do formulário pra api
     axios.post('http://127.0.0.1:5000/dadosCafe', {
+    produto,
+    quantidade,
+    dosagem,
+    velocidade,
     cidade,
     dateEntrada,
     dateSaida
@@ -83,7 +92,6 @@ function Cafe() {
     .catch(error => {
       console.error(error);
     });
-
   };
 
   //MenuBar barras
@@ -117,24 +125,31 @@ function Cafe() {
           <button className='btnback' onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave} onClick={handleButtonBack}><svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg></button>
           
-          <input className='inputpage3' type="text" name="inputName" placeholder='PRODUTO'/>
-          <input className='inputpage3' type="text" name="inputQuantidade" placeholder='QUANTIDADE'/>
-          <input className='inputpage3' type="text" name="inputDosagem" placeholder='DOSAGEM'/>
-          <input className='inputpage3' type="text" name="inputVelocidade" placeholder='VELOCIDADE DE APLICAÇÃO (KM/H)'/>
+          <input className='inputpage3' type="text" name="inputName" placeholder='PRODUTO'
+            value = {produto} onChange={(e) => setProduto(e.target.value)}/>
+
+          <input className='inputpage3' type="text" name="inputQuantidade" placeholder='QUANTIDADE'
+            value = {quantidade} onChange={(e) => setQuantidade(e.target.value)}/>
+
+          <input className='inputpage3' type="text" name="inputDosagem" placeholder='DOSAGEM'
+            value = {dosagem} onChange={(e) => setDosagem(e.target.value)}/>
+
+          <input className='inputpage3' type="text" name="inputVelocidade" placeholder='VELOCIDADE DE APLICAÇÃO (KM/H)'
+          value = {velocidade} onChange={(e) => setVelocidade(e.target.value)}/>
 
           <input className='inputpage3' type="text" name="inputCity" placeholder='CIDADE' 
-                  value = {cidade} onChange={(e) => setCidade(e.target.value)}/>
+            value = {cidade} onChange={(e) => setCidade(e.target.value)}/>
           
           <div class='dates'>
             <input className='inputpage3' type="text" name="inputDateInicial" placeholder="DIA/MES HORA" 
-                    value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />
+              value = {dateEntrada} onChange={(e) => setDateEntrada(e.target.value)} />
             <div class='date_between'></div>
             <input className='inputpage3' type="text" name="inputDateFinal" placeholder="DIA/MES HORA" 
-                    value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
+              value = {dateSaida} onChange={(e) => setDateSaida(e.target.value)}/>
           </div>
           
           <button className='btnaddproduto' 
-                  type='submit'  
+                  type='submit'
                   onMouseDown={handleMouseClickIn}
                   onMouseUp={handleMouseClickOut}
                   >SUBMIT</button>
