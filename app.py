@@ -6,6 +6,9 @@ import config
 import datetime
 import pytz
 from plots import make_plots
+import pyodbc
+import uuid
+import db_conn_string
 
 app = Flask(__name__)
 CORS(app)
@@ -69,6 +72,11 @@ def previsao_cafe():
     utc = pytz.timezone('UTC') 
     utc3 = pytz.timezone('America/Sao_Paulo')  
     
+
+    produto = data['produto']
+    dosagem = data['dosagem']
+    quantidade = data['quantidade']
+    velocidade = data['velocidade']
     city_name = data['cidade']
     initial_date = data['dateEntrada']
     final_date = data['dateSaida']
@@ -181,6 +189,40 @@ def previsao_cafe():
         formatted_dates.append(formatted_date)
 
     # make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
+    
+    unique_id = str(uuid.uuid4())
+
+    # Convert JSON data to Python dictionary
+    with open('data_cafe.json', 'r') as d:
+        data_db = json.load(d)
+
+    # Extract relevant information
+    timelines = data_db['data']['timelines']
+    startTime = timelines[0]['intervals'][0]['startTime']
+    endTime = timelines[0]['endTime']
+    valores = timelines[0]['intervals']
+    json_values = json.dumps(valores)
+    
+    # crie a string de conexão com o banco de dados
+    connection_string = db_conn_string.connection_string
+
+    # Conecte-se ao banco de dados
+    conn = pyodbc.connect(connection_string)
+
+    # Crie um cursor para executar comandos SQL
+    cur = conn.cursor()
+
+    # Insira os valores na tabela cafe
+    cur.execute("INSERT INTO café (id, nome_produto, quantidade, dosagem, velocidade, cidade, dataInicio, dataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (unique_id, produto, quantidade, dosagem, velocidade, city_name, initial_date, final_date))
+
+    cur.execute("INSERT INTO valores_café (id, startTime, endTime,  valores) VALUES (?, ?, ?, ?)", (unique_id, startTime, endTime, json_values))
+    # Salve as mudanças no banco de dados
+    conn.commit()
+
+    # Feche a conexão com o banco de dados
+    cur.close()
+    conn.close()
 
     return data
 
@@ -204,11 +246,13 @@ def previsao_gado():
     utc = pytz.timezone('UTC') 
     utc3 = pytz.timezone('America/Sao_Paulo')  
 
+    nome = data['nome']
+    cabeças = data['cabeças']
+    obs = data['obs']
     city_name = data['cidade']
     initial_date = data['dateEntrada']
     final_date = data['dateSaida']
     timesteps = '1d'
-
 
     # Replace with your API keys
     opencage_api_key = config.opencage_api_key
@@ -311,6 +355,39 @@ def previsao_gado():
 
     # make_plots(dates, temperatures, pop, rain, city_name)
 
+    unique_id = str(uuid.uuid4())
+
+    # Convert JSON data to Python dictionary
+    with open('data_gado.json', 'r') as d:
+        data_db = json.load(d)
+
+    # Extract relevant information
+    timelines = data_db['data']['timelines']
+    startTime = timelines[0]['intervals'][0]['startTime']
+    endTime = timelines[0]['endTime']
+    valores = timelines[0]['intervals']
+    json_values = json.dumps(valores)
+    
+    # crie a string de conexão com o banco de dados
+    connection_string = db_conn_string.connection_string
+
+    # Conecte-se ao banco de dados
+    conn = pyodbc.connect(connection_string)
+
+    # Crie um cursor para executar comandos SQL
+    cur = conn.cursor()
+
+    # Insira os valores na tabela cafe
+    cur.execute("INSERT INTO gado (id, nome, cabeças, observação, cidade, dataInicio, dataFinal) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (unique_id, nome, cabeças, obs, city_name, initial_date, final_date))
+
+    cur.execute("INSERT INTO valores_gado (id, startTime, endTime,  valores) VALUES (?, ?, ?, ?)", (unique_id, startTime, endTime, json_values))
+    # Salve as mudanças no banco de dados
+    conn.commit()
+
+    # Feche a conexão com o banco de dados
+    cur.close()
+    conn.close()
     return data
 
 @app.route("/apiGado", methods=['GET'])
