@@ -72,7 +72,7 @@ function ApiCafe() {
             {timeline.intervals.map((interval, index) => (
               <ul key={index}>
                 {/* <li>{FormatDate(interval.startTime)}</li> */}
-                <li>{interval.startTime}</li>
+                <li>{FormatDate(interval.startTime)}</li>
                 <li>Temperature: {interval.values.temperature}°C</li>
                 <li>Humidity: {interval.values.humidity}%</li>
                 <li>Wind speed: {interval.values.windSpeed} km/h</li>
