@@ -11,6 +11,7 @@ import axios from 'axios';
 function Gado() {
   const [nome, setNome] = useState('');
   const [cabeças, setCabeças] = useState('');
+  const [piquete, setPiquete] = useState('');
   const [obs, setObs] = useState('');
   const [cidade, setCidade] = useState('');
   const [dateEntrada, setDateEntrada] = useState('');
@@ -83,6 +84,7 @@ function Gado() {
     axios.post('http://127.0.0.1:5000/dadosGado', {
     nome,
     cabeças,
+    piquete,
     obs,
     cidade,
     dateEntrada,
@@ -129,6 +131,9 @@ function Gado() {
 
           <input className='inputpage3' type="text" name="inputCabecas" placeholder='CABEÇAS DE GADO'
           value = {cabeças} onChange={(e) => setCabeças(e.target.value)}/>
+
+          <input className='inputpage3' type="text" name="inputPiquete" placeholder='PIQUETE'
+          value = {piquete} onChange={(e) => setPiquete(e.target.value)}/>
 
           <input className='inputpage3' type="text" name="inputObs" placeholder='OBSERVAÇÃO'
           value = {obs} onChange={(e) => setObs(e.target.value)}/>

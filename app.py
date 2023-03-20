@@ -248,6 +248,7 @@ def previsao_gado():
 
     nome = data['nome']
     cabeças = data['cabeças']
+    piquete = data['piquete']
     obs = data['obs']
     city_name = data['cidade']
     initial_date = data['dateEntrada']
@@ -378,8 +379,8 @@ def previsao_gado():
     cur = conn.cursor()
 
     # Insira os valores na tabela cafe
-    cur.execute("INSERT INTO gado (id, nome, cabeças, observação, cidade, dataInicio, dataFinal) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                (unique_id, nome, cabeças, obs, city_name, initial_date, final_date))
+    cur.execute("INSERT INTO gado (id, nome, cabeças, piquete, observação, cidade, dataInicio, dataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (unique_id, nome, cabeças, piquete, obs, city_name, initial_date, final_date))
 
     cur.execute("INSERT INTO valores_gado (id, startTime, endTime,  valores) VALUES (?, ?, ?, ?)", (unique_id, startTime, endTime, json_values))
     # Salve as mudanças no banco de dados
