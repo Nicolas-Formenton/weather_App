@@ -26,6 +26,8 @@ h2 {
     align-items: center;
     justify-content: center;
     color: #204b5e;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .page1{

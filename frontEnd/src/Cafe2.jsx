@@ -70,19 +70,19 @@ function ApiCafe() {
       </div>
 
       {data.data.timelines.map((timeline, index) => (
-        <div key={index}>
+        <div key={index} className='divLista'>
           {/* <h2>{timeline.startTime} - {timeline.endTime}</h2> */}
           <div>
             {timeline.intervals.map((interval, index) => (
               <ul key={index}>
                 {/* <li>{FormatDate(interval.startTime)}</li> */}
                 <li>{FormatDate(interval.startTime)}</li>
-                <li>Temperature: {interval.values.temperature}°C</li>
-                <li>Humidity: {interval.values.humidity}%</li>
-                <li>Wind speed: {interval.values.windSpeed} km/h</li>
-                <li>Evapotranspiration: {interval.values.evapotranspiration} mm/h</li>
-                <li>Precipitation probability: {interval.values.precipitationProbability}%</li>
-                <li>Rain accumulation: {interval.values.rainAccumulation} mm/h</li>
+                <li>Temperature: <strong>{interval.values.temperature} °C</strong></li>
+                <li>Humidity: <strong>{interval.values.humidity} %</strong></li>
+                <li>Wind speed: <strong>{interval.values.windSpeed} km/h</strong></li>
+                <li>Evapotranspiration: <strong>{interval.values.evapotranspiration} mm/h</strong></li>
+                <li>Precipitation probability: <strong>{interval.values.precipitationProbability} %</strong></li>
+                <li>Rain accumulation: <strong>{interval.values.rainAccumulation} mm/h</strong></li>
               </ul>
             ))}
           </div>
