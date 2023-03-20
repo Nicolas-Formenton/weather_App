@@ -7,7 +7,6 @@ import datetime
 import pytz
 from plots import make_plots
 import pyodbc
-import uuid
 import db_conn_string
 
 app = Flask(__name__)
@@ -189,8 +188,6 @@ def previsao_cafe():
         formatted_dates.append(formatted_date)
 
     # make_plots(dates, temperatures, humidities, windspeeds_kmh, pop, rain, ETp, city_name)
-    
-    unique_id = str(uuid.uuid4())
 
     # Convert JSON data to Python dictionary
     with open('data_cafe.json', 'r') as d:
@@ -213,10 +210,9 @@ def previsao_cafe():
     cur = conn.cursor()
 
     # Insira os valores na tabela cafe
-    cur.execute("INSERT INTO café (id, nome_produto, quantidade, dosagem, velocidade, cidade, dataInicio, dataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                (unique_id, produto, quantidade, dosagem, velocidade, city_name, initial_date, final_date))
+    cur.execute("INSERT INTO café (nome_produto, quantidade, dosagem, velocidade, cidade, dataInicio, dataFinal, valores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (produto, quantidade, dosagem, velocidade, city_name, initial_date, final_date, json_values))
 
-    cur.execute("INSERT INTO valores_café (id, startTime, endTime,  valores) VALUES (?, ?, ?, ?)", (unique_id, startTime, endTime, json_values))
     # Salve as mudanças no banco de dados
     conn.commit()
 
@@ -356,8 +352,6 @@ def previsao_gado():
 
     # make_plots(dates, temperatures, pop, rain, city_name)
 
-    unique_id = str(uuid.uuid4())
-
     # Convert JSON data to Python dictionary
     with open('data_gado.json', 'r') as d:
         data_db = json.load(d)
@@ -379,10 +373,9 @@ def previsao_gado():
     cur = conn.cursor()
 
     # Insira os valores na tabela cafe
-    cur.execute("INSERT INTO gado (id, nome, cabeças, piquete, observação, cidade, dataInicio, dataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                (unique_id, nome, cabeças, piquete, obs, city_name, initial_date, final_date))
+    cur.execute("INSERT INTO gado (nome, cabeças, piquete, observação, cidade, dataInicio, dataFinal, valores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (nome, cabeças, piquete, obs, city_name, initial_date, final_date, json_values))
 
-    cur.execute("INSERT INTO valores_gado (id, startTime, endTime,  valores) VALUES (?, ?, ?, ?)", (unique_id, startTime, endTime, json_values))
     # Salve as mudanças no banco de dados
     conn.commit()
 
@@ -397,6 +390,118 @@ def api_gado():
         data = json.load(f)
 
     return jsonify(data)
+
+
+
+
+conn_str = db_conn_string.connection_string
+@app.route('/apiProdutosCafé', methods = ['GET'])
+def api_produtos_cafe():
+    # Cria um objeto de conexão usando a string de conexão
+    conn = pyodbc.connect(conn_str)
+
+    cursor = conn.cursor()
+    cursor.execute('SELECT nome_produto FROM café')
+
+    data = []
+    for row in cursor.fetchall():
+        # Extrai a coluna da linha
+        value = row[0]
+
+        # Adiciona o valor na lista
+        data.append(value)
+    
+    # Fecha a conexão
+    conn.close()
+
+    # Retorna as informações como JSON
+    return jsonify(data)
+
+@app.route('/apiValoresCafé', methods = ['GET'])
+def api_valores_cafe():
+    # Cria um objeto de conexão usando a string de conexão
+    conn = pyodbc.connect(conn_str)
+    
+    cursor = conn.cursor()
+    cursor.execute('SELECT valores FROM café')
+
+    valores_list = []
+    # Itere através dos resultados do cursor
+    for row in cursor:
+        # Obtenha o valor da coluna 'valores' como uma string JSON
+        json_string = row[0]
+
+        # Analise a string JSON em um objeto Python
+        json_data = json.loads(json_string)
+
+        # Adicione o array de valores a lista
+        valores_list.append(json_data)
+    
+    for valores in valores_list:
+        for valor in valores:
+            valor.pop('startTime')
+
+    # Retorne a lista de arrays de valores como JSON
+
+    # Fecha a conexão
+    conn.close()
+
+    # Retorna as informações como JSON
+    return jsonify(valores_list)
+
+@app.route('/apiProdutosGado', methods = ['GET'])
+def api_produtos_gado():
+    # Cria um objeto de conexão usando a string de conexão
+    conn = pyodbc.connect(conn_str)
+
+    cursor = conn.cursor()
+    cursor.execute('SELECT nome FROM gado')
+
+    data = []
+    for row in cursor.fetchall():
+        # Extrai a coluna da linha
+        value = row[0]
+
+        # Adiciona o valor na lista
+        data.append(value)
+    
+    # Fecha a conexão
+    conn.close()
+
+    # Retorna as informações como JSON
+    return jsonify(data)
+
+@app.route('/apiValoresGado', methods = ['GET'])
+def api_valores_gado():
+    # Cria um objeto de conexão usando a string de conexão
+    conn = pyodbc.connect(conn_str)
+    
+    cursor = conn.cursor()
+    cursor.execute('SELECT valores FROM gado')
+
+    valores_list = []
+    # Itere através dos resultados do cursor
+    for row in cursor:
+        # Obtenha o valor da coluna 'valores' como uma string JSON
+        json_string = row[0]
+
+        # Analise a string JSON em um objeto Python
+        json_data = json.loads(json_string)
+
+        # Adicione o array de valores a lista
+        valores_list.append(json_data)
+    
+    for valores in valores_list:
+        for valor in valores:
+            valor.pop('startTime')
+
+    # Retorne a lista de arrays de valores como JSON
+
+    # Fecha a conexão
+    conn.close()
+
+    # Retorna as informações como JSON
+    return jsonify(valores_list)
 
 if __name__ == '__main__':
     app.run()
