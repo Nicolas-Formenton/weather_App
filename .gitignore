@@ -3,3 +3,5 @@ config.py
 __pycache__/.*
 data_cafe.json
 data_gado.json
+realtime_data.json
+db_conn_string.py

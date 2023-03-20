@@ -4,10 +4,14 @@ import Cafe from "./Cafe";
 import Gado from "./Gado";
 import Relatorio from "./Relatorio";
 import MenuBar from "./menubar";
+import logo from './style/img/logo.png';
 import DropDown from "./DropDown";
+import local_icon from "./style/icons/local_icon.png";
 
 function Page2() {
-  //EFEITO CLICK CAFE
+
+  const [cidade, setCidade] = useState('');
+
   const handleMouseClickIn = () => {
     const btnopcao = document.querySelector(".efeitoClick");
     btnopcao.style.transform = "translateY(3px)";
@@ -16,18 +20,6 @@ function Page2() {
   const handleMouseClickOut = () => {
     const btnopcao = document.querySelector(".efeitoClick");
     btnopcao.style.transform = "translateY(0px)";
-  };
-
-  //EFEITO CLICK GADO
-
-  const handleMouseClickIn4 = () => {
-    const btnopcao4 = document.querySelector(".efeitoClick4");
-    btnopcao4.style.transform = "translateY(3px)";
-  };
-
-  const handleMouseClickOut4 = () => {
-    const btnopcao4 = document.querySelector(".efeitoClick4");
-    btnopcao4.style.transform = "translateY(0px)";
   };
 
   //Ativação e desativação das paginas
@@ -51,10 +43,21 @@ function Page2() {
 
   const handleButtonForward = () => {
     setDestination("apiCafe");
+    const submitted = document.querySelector('.btnaddpage2')
+    submitted.style.opacity = '0.7'
+    submitted.textContent = "Submitted!";
   };
 
-  const handleSubmit = (e) => {
+    // Fazer o DropDown aparecer
+
+    const [showComponent, setShowComponent] = useState(false);
+
+    const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Fazer o DropDown aparecer
+    setShowComponent(true);
+
     // loop p ver no console o que está saindo do submit
     const formData = new FormData(e.target);
     const data = {};
@@ -64,21 +67,21 @@ function Page2() {
     console.log(JSON.stringify(data));
     
     // enviando dados do formulário pra api
-    fetch('http://127.0.0.1:5000/dadosCafe', {
+    fetch('http://127.0.0.1:5000/dadosRealtime', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cidade,
-        dateEntrada,
-        dateSaida
+        cidade
       })
     })
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
   };
+
+
 
   //MenuBar barras
   const exibirBarraSuperiorRelatorio = false;
@@ -92,35 +95,37 @@ function Page2() {
     return <Gado />;
   } else if (destination === "page2") {
     return <Page2 />;
-  } else if (destination === "relatorio") {
+  } 
+  
+  
+  // else if(destination === "apiCafe"){
+  //   return <ApiCafe/>;
+  // } 
+  
+  
+  else if (destination === "relatorio") {
     return <Relatorio />;
   } else {
     return (
 
+    <div className="divscroll">
+
+     
       <div className="btnlista">
-        <form className='divInput'  onSubmit={handleSubmit}>
+        
+        <form className='divInputPage2'  onSubmit={handleSubmit}>
+        
+        <img className="imglogo" src={logo} alt="Logo" />
+        <div className="divlocalizacao">
+          <img className="iconloc" src={local_icon}></img>
         <input
           className="inputCidade"
           type="text"
           name="Cidade"
-          placeholder="Cidade..."
+          placeholder="Localização" 
+          value = {cidade} onChange={(e) => setCidade(e.target.value)}
         />
-        <div class="dates">
-          <input
-            className="inputDate"
-            type="text"
-            name="inputDateInicial"
-            placeholder="DIA/MES HORA"
-          />
-          <div class="date_between"></div>
-          <input
-            className="inputDate"
-            type="text"
-            name="inputDateFinal"
-            placeholder="DIA/MES HORA"
-          />
         </div>
-
         <button
           className="btnaddpage2"
           type="submit"
@@ -128,16 +133,14 @@ function Page2() {
           onMouseUp={handleMouseClickOut}
           onClick={handleButtonForward}
         >
-          SUBMIT
+        Submit
         </button>
 
-        <DropDown />
-        </form>
+        {showComponent && <DropDown />}
 
-        
-        {/* AQUI É A  MENUBAR */}
+               {/* AQUI É A  MENUBAR */}
 
-        <div className="barra">
+      <div className="barra">
           <div>
             {exibirBarraSuperiorHome && (
               <div className="barraSuperiorHome"></div>
@@ -287,7 +290,9 @@ function Page2() {
             </button>
           </div>
         </div>
+        </form>
       </div>
+    </div>
     );
   }
 }

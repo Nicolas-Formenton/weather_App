@@ -1,0 +1,31 @@
+.divSelects{
+    display: grid;
+    width: 60%;
+    margin-top: 10%;
+    grid-template-columns: auto auto;
+}
+
+.divTempo{
+  width: 165px;
+  height: 60px;
+  background: #204b5e;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+
+.imgsvg{
+  position: absolute;
+  left: 15px;
+  height: 30px;
+  width: 30px;
+}

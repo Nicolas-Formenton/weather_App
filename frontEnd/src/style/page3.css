@@ -33,12 +33,12 @@ input:focus {
 }
 
 .btnaddproduto{
-    width: 50%;
-    height: 56px;
+    width: 35%;
+    height: 45px;
     background: #204b5e;
     border: none;
     border-radius: 8px;
-    margin-top: 30px;
+    margin-top: 10px;
     box-sizing: border-box;
 }
 
@@ -68,5 +68,5 @@ input:focus {
     width: 70%;
 }
 .date_between {
-    width: 80px;
+    width: 60px;
 }
