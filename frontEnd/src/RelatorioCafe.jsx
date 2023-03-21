@@ -92,7 +92,7 @@ else{
       </div>
 
       <div className='divListaCafe'>
-        {produtos.map((produto, index) => (
+        {[...new Set(produtos)].map((produto, index) => (
           <div className='itemCafe' key={index}>{produto}</div>
         ))}
       </div>
