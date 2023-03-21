@@ -9,64 +9,82 @@ import Cafe from './Cafe'
 import Gado from './Gado'
 import MenuBar from './menubar'
 import Relatorio from "./Relatorio";
+import axios from 'axios';
 
 function RelatorioCafe() {
 
-   //Ativação e desativação das paginas
- const [destination, setDestination] = useState("");
+  //Ativação e desativação das paginas
+  const [destination, setDestination] = useState("");
 
- const handleButtonCafe = () => {
-   setDestination("cafe");
- };
+  const handleButtonCafe = () => {
+    setDestination("cafe");
+  };
 
- const handleButtonGado = () => {
-   setDestination("gado");
- };
+  const handleButtonGado = () => {
+    setDestination("gado");
+  };
 
- const handleButtonPage2 = () => {
-   setDestination("page2");
- };
+  const handleButtonPage2 = () => {
+    setDestination("page2");
+  };
 
- const handleButtonRelatorio = () => {
-   setDestination("relatorio");
- };
+  const handleButtonRelatorio = () => {
+    setDestination("relatorio");
+  };
 
- const handleButtonRelatorioGado = () => {
+  const handleButtonRelatorioGado = () => {
   setDestination("relatorioGado");
-};
+  };
 
 
- const handleButtonBack = () => {
-   setDestination("back");
- };
+  const handleButtonBack = () => {
+    setDestination("back");
+  };
 
- const handleButtonForward = () => {
-   setDestination("apiCafe")
- };
+  const handleButtonForward = () => {
+    setDestination("apiCafe")
+  };
+
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:5000/apiProdutosCafé')
+      .then(response => {
+        setData(response.data);
+        console.log(JSON.stringify(data))
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
 //MenuBar barras
 const exibirBarraSuperiorRelatorio = true;
 const exibirBarraSuperiorCafe = false;
 const exibirBarraSuperiorGado = false;
 const exibirBarraSuperiorHome = false;
-   
 
 
- if (destination === "back") {
+
+if (destination === "back") {
   return <Page2 />;
- }
- else if(destination == "apiCafe"){
-   return <ApiCafe/>;
- }if (destination === "cafe") {
-   return <Cafe />;
- }
- else if (destination === "gado") {
-   return <Gado />;
- }else if (destination === "page2") {
-   return <Page2 />;
- }else if (destination === "relatorio") {
-   return <Relatorio />;
- }else{
+}
+else if(destination == "apiCafe"){
+  return <ApiCafe/>;
+}
+if (destination === "cafe") {
+  return <Cafe />;
+}
+else if (destination === "gado") {
+  return <Gado />;
+}
+else if (destination === "page2") {
+  return <Page2 />;
+}
+else if (destination === "relatorio") {
+  return <Relatorio />;
+}
+else{
   return (
     <form className='divInput'>
       <div className=''>
