@@ -1,7 +1,7 @@
 import './style/relatorioGado.css'
 import { useState, useEffect } from 'react';
 import apiPages from './style/ApiPages.css';
-import relatorio from './style/relatorio.css';
+import relatorioGado from './style/relatorioGado.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
 import ApiGado from './Gado2'
@@ -66,33 +66,43 @@ function RelatorioGado() {
 
 
 
-  if (destination === "back") {
-    return <Page2 />;
-  }
-  else if(destination == "apiCafe"){
-    return <ApiCafe/>;
-  }
-  if (destination === "cafe") {
-    return <Cafe />;
-  }
-  else if (destination === "gado") {
-    return <Gado />;
-  }
-  else if (destination === "page2") {
-    return <Page2 />;
-  }
-  else if (destination === "relatorio") {
-    return <Relatorio />;
-  }
-  else if(destination == "relatorioGado"){
-    return <RelatorioGado />;
-  }
-  else{
-    return (
-      <form className='divInput'>
-        <div className='divGadoPai'>
-          Manutenção do Relatório Gado
-        </div>
+if (destination === "back") {
+  return <Page2 />;
+}
+else if(destination == "apiCafe"){
+  return <ApiCafe/>;
+}
+if (destination === "cafe") {
+  return <Cafe />;
+}
+else if (destination === "gado") {
+  return <Gado />;
+}
+else if (destination === "page2") {
+  return <Page2 />;
+}
+else if (destination === "relatorio") {
+  return <Relatorio />;
+}
+else if(destination == "relatorioGado"){
+  return <RelatorioGado />;
+}
+else{
+  return (
+    <form className='divInput'>
+      <div className='divGadoPai'>
+        RELATÓRIOS DO GADO
+      </div>
+
+      <div className='divListaGado'>
+        <div className='itemGado'>ITEM 1</div>
+        <div className='itemGado'>ITEM 2</div>
+        <div className='itemGado'>ITEM 3</div>
+        <div className='itemGado'>ITEM 4</div>
+        <div className='itemGado'>ITEM 5</div>
+        <div className='itemGado'>ITEM 6</div>
+        <div className='itemGado'>ITEM 7</div>
+      </div>
 
 
 

@@ -1,7 +1,7 @@
 import './style/relatorioGado.css'
 import { useState, useEffect } from 'react';
 import apiPages from './style/ApiPages.css';
-import relatorio from './style/relatorio.css';
+import relatorioCafe from './style/relatorioCafe.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
 import ApiGado from './Gado2'
@@ -87,11 +87,19 @@ else if (destination === "relatorio") {
 else{
   return (
     <form className='divInput'>
-      <div className=''>
-        Manutenção do Relatório Cafe
+      <div className='tituloCafe'>
+       RELATÓRIOS DO CAFÉ
       </div>
 
-
+      <div className='divListaCafe'>
+        <div className='itemCafe'>ITEM 1</div>
+        <div className='itemCafe'>ITEM 2</div>
+        <div className='itemCafe'>ITEM 3</div>
+        <div className='itemCafe'>ITEM 4</div>
+        <div className='itemCafe'>ITEM 5</div>
+        <div className='itemCafe'>ITEM 6</div>
+        <div className='itemCafe'>ITEM 7</div>
+      </div>
 
 
 
