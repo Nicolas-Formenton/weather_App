@@ -74,7 +74,7 @@ function ApiGado() {
           <div className='divLista'>
             {timeline.intervals.map((interval, index) => (           
               <ul key={index}>
-                <li>{FormatDate(interval.startTime)}</li>
+                <li><strong>{FormatDate(interval.startTime)}</strong></li>
                 <li>Temperature:<strong>{interval.values.temperature} °C</strong></li>
                 <li>Precipitation probability:<strong>{interval.values.precipitationProbability} %</strong> </li>
                 <li>Rain accumulation:<strong>{interval.values.rainAccumulation} mm/d</strong> </li>
