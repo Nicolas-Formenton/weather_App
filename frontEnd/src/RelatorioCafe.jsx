@@ -45,13 +45,13 @@ function RelatorioCafe() {
     setDestination("apiCafe")
   };
 
-  const [data, setData] = useState('');
+  const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/apiProdutosCafé')
       .then(response => {
-        setData(response.data);
-        console.log(JSON.stringify(data))
+        setProdutos(response.data);
+        // console.log(JSON.stringify(data)) 
       })
       .catch(error => {
         console.error(error);
@@ -92,13 +92,9 @@ else{
       </div>
 
       <div className='divListaCafe'>
-        <div className='itemCafe'>ITEM 1</div>
-        <div className='itemCafe'>ITEM 2</div>
-        <div className='itemCafe'>ITEM 3</div>
-        <div className='itemCafe'>ITEM 4</div>
-        <div className='itemCafe'>ITEM 5</div>
-        <div className='itemCafe'>ITEM 6</div>
-        <div className='itemCafe'>ITEM 7</div>
+        {produtos.map((produto, index) => (
+          <div className='itemCafe' key={index}>{produto}</div>
+        ))}
       </div>
 
 

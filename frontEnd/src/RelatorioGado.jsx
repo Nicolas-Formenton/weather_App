@@ -45,13 +45,13 @@ function RelatorioGado() {
     setDestination("apiCafe")
   };
 
-  const [data, setData] = useState('');
+  const [nome, setNome] = useState([]);
 
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/apiProdutosGado')
       .then(response => {
-        setData(response.data);
-        console.log(JSON.stringify(data))
+        setNome(response.data);
+        // console.log(JSON.stringify(data))
       })
       .catch(error => {
         console.error(error);
@@ -95,13 +95,9 @@ else{
       </div>
 
       <div className='divListaGado'>
-        <div className='itemGado'>ITEM 1</div>
-        <div className='itemGado'>ITEM 2</div>
-        <div className='itemGado'>ITEM 3</div>
-        <div className='itemGado'>ITEM 4</div>
-        <div className='itemGado'>ITEM 5</div>
-        <div className='itemGado'>ITEM 6</div>
-        <div className='itemGado'>ITEM 7</div>
+        {nome.map((nome, index) => (
+          <div className='itemGado' key={index}>{nome}</div>
+        ))}
       </div>
 
 
