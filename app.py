@@ -422,6 +422,28 @@ def api_produtos_cafe():
     # Retorna as informações como JSON
     return jsonify(data)
 
+@app.route('/apiDatasCafé', methods = ['GET'])
+def api_datas_cafe():
+    # Cria um objeto de conexão usando a string de conexão
+    conn = pyodbc.connect(conn_str)
+
+    cursor = conn.cursor()
+    cursor.execute('SELECT dataInicio from café')
+
+    data = []
+    for row in cursor.fetchall():
+        # Extrai a coluna da linha
+        value = row[0]
+
+        # Adiciona o valor na lista
+        data.append(value)
+    
+    # Fecha a conexão
+    conn.close()
+
+    # Retorna as informações como JSON
+    return jsonify(data)
+
 @app.route('/apiValoresCafé', methods = ['GET'])
 def api_valores_cafe():
     # Cria um objeto de conexão usando a string de conexão
@@ -454,6 +476,7 @@ def api_valores_cafe():
     # Retorna as informações como JSON
     return jsonify(valores_list)
 
+
 @app.route('/apiProdutosGado', methods = ['GET'])
 def api_produtos_gado():
     # Cria um objeto de conexão usando a string de conexão
@@ -461,6 +484,28 @@ def api_produtos_gado():
 
     cursor = conn.cursor()
     cursor.execute('SELECT nome FROM gado')
+
+    data = []
+    for row in cursor.fetchall():
+        # Extrai a coluna da linha
+        value = row[0]
+
+        # Adiciona o valor na lista
+        data.append(value)
+    
+    # Fecha a conexão
+    conn.close()
+
+    # Retorna as informações como JSON
+    return jsonify(data)
+
+@app.route('/apiDatasGado', methods = ['GET'])
+def api_datas_gado():
+    # Cria um objeto de conexão usando a string de conexão
+    conn = pyodbc.connect(conn_str)
+
+    cursor = conn.cursor()
+    cursor.execute('SELECT dataInicio from gado')
 
     data = []
     for row in cursor.fetchall():
