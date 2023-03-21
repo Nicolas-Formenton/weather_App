@@ -6,6 +6,7 @@ import Loading  from './loading'
 import FormatDate from './date';
 import { format } from 'date-fns';
 import Gado from './Gado'
+import FormatDate2 from './date2';
 
 // API GADO RETRIEVE
 function ApiGado() {
@@ -65,9 +66,11 @@ function ApiGado() {
             onMouseLeave={handleMouseLeave} onClick={handleButtonBack}><svg className='svgarrowleft' viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></svg>
       </button>
 
-      <div className='semNome'>
-          <strong>ApiGado</strong>
+      {data.data.timelines.map((timeline, index) => (
+      <div key = {index} className='semNome'>
+          <strong>Relatório de {FormatDate2(timeline.startTime)} - {FormatDate2(timeline.endTime)}</strong>
       </div>
+      ))}
 
       {data.data.timelines.map((timeline, index) => (
         <div key={index}>
@@ -75,9 +78,9 @@ function ApiGado() {
             {timeline.intervals.map((interval, index) => (           
               <ul key={index}>
                 <li><strong>{FormatDate(interval.startTime)}</strong></li>
-                <li>Temperature:<strong>{interval.values.temperature} °C</strong></li>
-                <li>Precipitation probability:<strong>{interval.values.precipitationProbability} %</strong> </li>
-                <li>Rain accumulation:<strong>{interval.values.rainAccumulation} mm/d</strong> </li>
+                <li>Temperatura: <strong>{interval.values.temperature} °C</strong></li>
+                <li>Precipitação: <strong>{interval.values.precipitationProbability} %</strong> </li>
+                <li>Acumulo de Chuva: <strong>{interval.values.rainAccumulation} mm/d</strong> </li>
               </ul>
             ))}
           </div>
