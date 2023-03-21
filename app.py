@@ -8,6 +8,7 @@ import pytz
 from plots import make_plots
 import pyodbc
 import db_conn_string
+import uuid
 
 app = Flask(__name__)
 CORS(app)
@@ -71,6 +72,7 @@ def previsao_cafe():
     utc = pytz.timezone('UTC') 
     utc3 = pytz.timezone('America/Sao_Paulo')  
     
+    unique_id = str(uuid.uuid4())
 
     produto = data['produto']
     dosagem = data['dosagem']
@@ -210,8 +212,8 @@ def previsao_cafe():
     cur = conn.cursor()
 
     # Insira os valores na tabela cafe
-    cur.execute("INSERT INTO café (nome_produto, quantidade, dosagem, velocidade, cidade, dataInicio, dataFinal, valores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                (produto, quantidade, dosagem, velocidade, city_name, initial_date, final_date, json_values))
+    cur.execute("INSERT INTO café (id, nome_produto, quantidade, dosagem, velocidade, cidade, dataInicio, dataFinal, valores) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (unique_id, produto, quantidade, dosagem, velocidade, city_name, initial_date, final_date, json_values))
 
     # Salve as mudanças no banco de dados
     conn.commit()
@@ -241,6 +243,9 @@ def previsao_gado():
 
     utc = pytz.timezone('UTC') 
     utc3 = pytz.timezone('America/Sao_Paulo')  
+
+    unique_id = str(uuid.uuid4())
+
 
     nome = data['nome']
     cabeças = data['cabeças']
@@ -373,8 +378,8 @@ def previsao_gado():
     cur = conn.cursor()
 
     # Insira os valores na tabela cafe
-    cur.execute("INSERT INTO gado (nome, cabeças, piquete, observação, cidade, dataInicio, dataFinal, valores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                (nome, cabeças, piquete, obs, city_name, initial_date, final_date, json_values))
+    cur.execute("INSERT INTO gado (id, nome, cabeças, piquete, observação, cidade, dataInicio, dataFinal, valores) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (unique_id, nome, cabeças, piquete, obs, city_name, initial_date, final_date, json_values))
 
     # Salve as mudanças no banco de dados
     conn.commit()
