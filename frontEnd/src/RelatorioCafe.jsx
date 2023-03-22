@@ -43,50 +43,47 @@ function RelatorioCafe() {
   const handleButtonForward = () => {
     setDestination("apiCafe")
   };
-
-  // const handleButtonValores = () => {
-  //   setDestination("valores");
-  //   };
-
+  
   
   // AQUI MOSTRA OS PRODUTOS
   const [produtos, setProdutos] = useState([]);
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/apiProdutosCafé')
-      .then(response => {
-        setProdutos(response.data);
-        // console.log(JSON.stringify(data)) 
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
-  // AQUI MOSTRA AS DATAS
-  const [date, setDate] = useState([]);
-  const handleButtonDataCafe = (event) => {
-    const nome_produto = event.target.textContent;
-    axios.get(`http://127.0.0.1:5000/apiDatasCafé?nome_produto=${nome_produto}`)
-      .then(response => {
-        setDate(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }; 
-
-  const [valores, setValores] = useState([]);
-  const handleButtonValoresCafe = (event) => {
-    const dataInicio = event.target.textContent;
-    // TA DANDO ERRO ABAIXO MAS SEGUE ESSA LINHA DE RACIOCINIO
-    const nome_produto = event.target.textContent;
-    axios.get(`http://127.0.0.1:5000/apiValoresCafé?nome_produto=${nome_produto}&dataInicio=${dataInicio}`)
     .then(response => {
-      setValores(response.data[0]);
+      setProdutos(response.data);
     })
     .catch(error => {
       console.error(error);
     });
+  }, []);
+  
+  const [produtoSelecionado, setProdutoSelecionado] = useState('');
+  
+  // AQUI MOSTRA AS DATAS
+  const [date, setDate] = useState([]);
+    const handleButtonDataCafe = (event) => {
+      const nome_produto = event.target.textContent;
+      setProdutoSelecionado(nome_produto);
+      axios.get(`http://127.0.0.1:5000/apiDatasCafé?nome_produto=${nome_produto}`)
+        .then(response => {
+          setDate(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+  }; 
+
+  // AQUI MOSTRA OS VALORES
+  const [valores, setValores] = useState([]);
+    const handleButtonValoresCafe = (event) => {
+      const dataInicio = event.target.textContent;
+      axios.get(`http://127.0.0.1:5000/apiValoresCafé?nome_produto=${produtoSelecionado}&dataInicio=${dataInicio}`)
+      .then(response => {
+        setValores(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
   
 
@@ -139,10 +136,22 @@ else{
       </div>
 
       <div className='divListaCafe'>
-        {valores.map((valores, index) => (
-          <div className='itemCafe' key={index}>{valores}</div>
+        {valores.map((listaValores, index) => (
+          <div className='itemCafe' key={index}>
+            {listaValores.map((valor, index) => (
+              <div key={index}>
+                Evapotranspiração: <strong>{valor.values.evapotranspiration}</strong> mm/h<br/>
+                Umidade: <strong>{valor.values.humidity}</strong> %<br/>
+                Precipitação: <strong>{valor.values.precipitationProbability}</strong> %<br/>
+                Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h<br/>
+                Temperatura: <strong>{valor.values.temperature}</strong> °C<br/>
+                Velocidade do vento: <strong>{valor.values.windSpeed}</strong> km/h<br/>
+              </div>
+            ))}
+          </div>
         ))}
       </div>
+
 
               {/* AQUI É A  MENUBAR */}
 

@@ -44,18 +44,46 @@ function RelatorioGado() {
     setDestination("apiCafe")
   };
 
+  
   const [nome, setNome] = useState([]);
-
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/apiProdutosGado')
       .then(response => {
         setNome(response.data);
-        // console.log(JSON.stringify(data))
       })
       .catch(error => {
         console.error(error);
       });
   }, []);
+
+    const [nomeSelecionado, setNomeSelecionado] = useState('');
+
+  // AQUI MOSTRA AS DATAS
+  const [date, setDate] = useState([]);
+    const handleButtonDataGado = (event) => {
+      const nome = event.target.textContent;
+      setNomeSelecionado(nome);
+      axios.get(`http://127.0.0.1:5000/apiDatasGado?nome=${nome}`)
+        .then(response => {
+          setDate(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+  }; 
+
+  // AQUI MOSTRA OS VALORES
+  const [valores, setValores] = useState([]);
+    const handleButtonValoresGado = (event) => {
+      const dataInicio = event.target.textContent;
+      axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&dataInicio=${dataInicio}`)
+      .then(response => {
+        setValores(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   //MenuBar barras
   const exibirBarraSuperiorRelatorio = true;
@@ -93,9 +121,29 @@ else{
         RELATÓRIOS DO GADO
       </div>
 
+<div className='divListaGado'>
+        {[...new Set(nome)].map((nome, index) => (
+          <div className='itemGado' onClick={handleButtonDataGado} key={index}>{nome}</div>
+        ))}
+      </div>
+
       <div className='divListaGado'>
-        {nome.map((nome, index) => (
-          <div className='itemGado' key={index}>{nome}</div>
+        {date.map((date, index) => (
+          <div className='itemGado' onClick = {handleButtonValoresGado} key={index}>{date}</div>
+        ))}
+      </div>
+
+      <div className='divListaGado'>
+        {valores.map((listaValores, index) => (
+          <div className='itemGado' key={index}>
+            {listaValores.map((valor, index) => (
+              <div key={index}>
+                Temperatura: <strong>{valor.values.temperature}</strong> °C<br/>
+                Precipitação: <strong>{valor.values.precipitationProbability}</strong> %<br/>
+                Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h<br/>
+              </div>
+            ))}
+          </div>
         ))}
       </div>
 

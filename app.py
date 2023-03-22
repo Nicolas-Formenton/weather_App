@@ -442,8 +442,8 @@ def api_datas_cafe():
     #     # Adiciona o valor na lista
     #     data.append(value)
     
-    # # Fecha a conexão
-    # conn.close()
+    # Fecha a conexão
+    conn.close()
 
     # Retorna as informações como JSON
     return jsonify(datas)
@@ -508,33 +508,33 @@ def api_produtos_gado():
 
 @app.route('/apiDatasGado', methods = ['GET'])
 def api_datas_gado():
+    nome = request.args.get('nome')
+
     # Cria um objeto de conexão usando a string de conexão
     conn = pyodbc.connect(conn_str)
 
     cursor = conn.cursor()
-    cursor.execute('SELECT dataInicio from gado')
+    cursor.execute(f"SELECT DISTINCT dataInicio FROM gado WHERE nome='{nome}'")
 
-    data = []
-    for row in cursor.fetchall():
-        # Extrai a coluna da linha
-        value = row[0]
-
-        # Adiciona o valor na lista
-        data.append(value)
+    datas = [str(data[0]) for data in cursor.fetchall()]
     
     # Fecha a conexão
     conn.close()
 
     # Retorna as informações como JSON
-    return jsonify(data)
+    return jsonify(datas)
 
 @app.route('/apiValoresGado', methods = ['GET'])
 def api_valores_gado():
+    nome = request.args.get('nome')
+    dataInicio = request.args.get('dataInicio')
+
     # Cria um objeto de conexão usando a string de conexão
     conn = pyodbc.connect(conn_str)
     
     cursor = conn.cursor()
-    cursor.execute('SELECT valores FROM gado')
+    cursor.execute(f"SELECT valores FROM gado WHERE nome = '{nome}' AND dataInicio = '{dataInicio}'")
+
 
     valores_list = []
     # Itere através dos resultados do cursor
