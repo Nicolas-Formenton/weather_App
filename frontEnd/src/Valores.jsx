@@ -14,7 +14,10 @@ import axios from 'axios';
 
 function DataCafe() {
 
-    
+    const addShadow = () => {
+        const efeito = document.querySelector('.itemCafe')
+        efeito.style.boxShadow = '0 2px 4px rgba(0,0,0,0.4);'
+    }
 
     //Ativação e desativação das paginas
     const [destination, setDestination] = useState("");
