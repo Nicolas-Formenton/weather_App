@@ -1,7 +1,6 @@
-import './style/relatorioGado.css'
 import { useState, useEffect } from 'react';
 import apiPages from './style/ApiPages.css';
-import relatorioGado from './style/relatorioGado.css';
+import './style/relatorioGado.css';
 import Page2 from './page2';
 import { format } from 'date-fns';
 import ApiGado from './Gado2'

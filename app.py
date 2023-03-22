@@ -424,33 +424,40 @@ def api_produtos_cafe():
 
 @app.route('/apiDatasCafé', methods = ['GET'])
 def api_datas_cafe():
+    nome_produto = request.args.get('nome_produto')
+
     # Cria um objeto de conexão usando a string de conexão
     conn = pyodbc.connect(conn_str)
 
     cursor = conn.cursor()
-    cursor.execute('SELECT dataInicio from café')
+    cursor.execute(f"SELECT DISTINCT dataInicio FROM café WHERE nome_produto='{nome_produto}'")
 
-    data = []
-    for row in cursor.fetchall():
-        # Extrai a coluna da linha
-        value = row[0]
+    datas = [str(data[0]) for data in cursor.fetchall()]
 
-        # Adiciona o valor na lista
-        data.append(value)
+    # data = []
+    # for row in cursor.fetchall():
+    #     # Extrai a coluna da linha
+    #     value = row[0]
+
+    #     # Adiciona o valor na lista
+    #     data.append(value)
     
-    # Fecha a conexão
-    conn.close()
+    # # Fecha a conexão
+    # conn.close()
 
     # Retorna as informações como JSON
-    return jsonify(data)
+    return jsonify(datas)
 
 @app.route('/apiValoresCafé', methods = ['GET'])
 def api_valores_cafe():
+    nome_produto = request.args.get('nome_produto')
+    dataInicio = request.args.get('dataInicio')
+
     # Cria um objeto de conexão usando a string de conexão
     conn = pyodbc.connect(conn_str)
     
     cursor = conn.cursor()
-    cursor.execute('SELECT valores FROM café')
+    cursor.execute(f"SELECT valores FROM café WHERE nome_produto = '{nome_produto}' AND dataInicio = '{dataInicio}'")
 
     valores_list = []
     # Itere através dos resultados do cursor
