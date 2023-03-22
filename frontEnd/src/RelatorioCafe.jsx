@@ -1,4 +1,3 @@
-import './style/relatorioGado.css'
 import { useState, useEffect } from 'react';
 import apiPages from './style/ApiPages.css';
 import relatorioCafe from './style/relatorioCafe.css';
@@ -10,6 +9,7 @@ import Gado from './Gado'
 import MenuBar from './menubar'
 import Relatorio from "./Relatorio";
 import axios from 'axios';
+import DataCafe from './DataCafe'
 
 function RelatorioCafe() {
 
@@ -36,6 +36,9 @@ function RelatorioCafe() {
   setDestination("relatorioGado");
   };
 
+  const handleButtonDataCafe = () => {
+    setDestination("datacafe");
+  };
 
   const handleButtonBack = () => {
     setDestination("back");
@@ -84,6 +87,9 @@ else if (destination === "page2") {
 else if (destination === "relatorio") {
   return <Relatorio />;
 }
+else if (destination === "datacafe") {
+  return <DataCafe />;
+}
 else{
   return (
     <form className='divInput'>
@@ -95,6 +101,7 @@ else{
         {[...new Set(produtos)].map((produto, index) => (
           <div className='itemCafe' key={index}>{produto}</div>
         ))}
+        <div className='itemCafe' onClick={handleButtonDataCafe}>ITEM 1</div>
       </div>
 
 
