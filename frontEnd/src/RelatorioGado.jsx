@@ -104,7 +104,6 @@ else{
 
 
 
-
               {/* AQUI É A  MENUBAR */}
 
               <div className='barra'>
