@@ -506,15 +506,15 @@ def api_produtos_gado():
     # Retorna as informações como JSON
     return jsonify(data)
 
-@app.route('/apiDatasGado', methods = ['GET'])
-def api_datas_gado():
+@app.route('/apiPiqueteGado', methods = ['GET'])
+def api_piquetes_gado():
     nome = request.args.get('nome')
 
     # Cria um objeto de conexão usando a string de conexão
     conn = pyodbc.connect(conn_str)
 
     cursor = conn.cursor()
-    cursor.execute(f"SELECT DISTINCT dataInicio FROM gado WHERE nome='{nome}'")
+    cursor.execute(f"SELECT DISTINCT piquete FROM gado WHERE nome='{nome}'")
 
     datas = [str(data[0]) for data in cursor.fetchall()]
     
@@ -527,13 +527,13 @@ def api_datas_gado():
 @app.route('/apiValoresGado', methods = ['GET'])
 def api_valores_gado():
     nome = request.args.get('nome')
-    dataInicio = request.args.get('dataInicio')
+    piquete = request.args.get('piquete')
 
     # Cria um objeto de conexão usando a string de conexão
     conn = pyodbc.connect(conn_str)
     
     cursor = conn.cursor()
-    cursor.execute(f"SELECT valores FROM gado WHERE nome = '{nome}' AND dataInicio = '{dataInicio}'")
+    cursor.execute(f"SELECT valores FROM gado WHERE nome = '{nome}' AND piquete = '{piquete}'")
 
 
     valores_list = []

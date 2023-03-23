@@ -46,10 +46,10 @@ function RelatorioGado() {
 
   const [currentList, setCurrentList] = useState('ListaGado');
 
-  const ButtonDataGado = () => {
-    setCurrentList('ListaData');
+  const ButtonPiqueteGado = () => {
+    setCurrentList('ListaPiquete');
     const titulo = document.querySelector('.tituloGado')
-    titulo.innerHTML = 'DATA'
+    titulo.innerHTML = 'PIQUETE'
   };
 
   const ButtonValoresGado = () => {
@@ -72,13 +72,13 @@ function RelatorioGado() {
   const [nomeSelecionado, setNomeSelecionado] = useState('');
 
   // AQUI MOSTRA AS DATAS
-  const [date, setDate] = useState([]);
-    const handleButtonDataGado = (event) => {
+  const [piquete, setPiquete] = useState([]);
+    const handleButtonPiqueteGado = (event) => {
       const nome = event.target.textContent;
       setNomeSelecionado(nome);
-      axios.get(`http://127.0.0.1:5000/apiDatasGado?nome=${nome}`)
+      axios.get(`http://127.0.0.1:5000/apiPiqueteGado?nome=${nome}`)
         .then(response => {
-          setDate(response.data);
+          setPiquete(response.data);
         })
         .catch(error => {
           console.error(error);
@@ -88,8 +88,8 @@ function RelatorioGado() {
   // AQUI MOSTRA OS VALORES
   const [valores, setValores] = useState([]);
     const handleButtonValoresGado = (event) => {
-      const dataInicio = event.target.textContent;
-      axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&dataInicio=${dataInicio}`)
+      const piquete = event.target.textContent;
+      axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&piquete=${piquete}`)
       .then(response => {
         setValores(response.data);
       })
@@ -137,15 +137,15 @@ else{
       {currentList === 'ListaGado' && (
       <div className='divListaGado'>
         {[...new Set(nome)].map((nome, index) => (
-          <div className='itemGado' onClick={ButtonDataGado} onMouseDown = {handleButtonDataGado} key={index}>{nome}</div>
+          <div className='itemGado' onClick={ButtonPiqueteGado} onMouseDown = {handleButtonPiqueteGado} key={index}>{nome}</div>
         ))}
       </div>
       )}
 
-      {currentList === 'ListaData' && (
-      <div className='divListaData'>
-        {date.map((date, index) => (
-          <div className='itemData' onClick = {ButtonValoresGado} onMouseDown = {handleButtonValoresGado} key={index}>{date}</div>
+      {currentList === 'ListaPiquete' && (
+      <div className='divListaGado'>
+        {piquete.map((piquete, index) => (
+          <div className='itemData' onClick = {ButtonValoresGado} onMouseDown = {handleButtonValoresGado} key={index}>{piquete}</div>
         ))}
       </div>
       )}
