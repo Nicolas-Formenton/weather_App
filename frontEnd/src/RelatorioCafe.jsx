@@ -44,6 +44,24 @@ function RelatorioCafe() {
     setDestination("apiCafe")
   };
   
+
+
+  // ALTERAÇÃO DE LISTA 
+
+  const [currentList, setCurrentList] = useState('ListaCafe');
+
+  const ButtonDataCafe = () => {
+    setCurrentList('ListaData');
+    const titulo = document.querySelector('.tituloCafe')
+    titulo.innerHTML = 'DATA'
+  };
+
+  const ButtonValoresCafe = () => {
+    setCurrentList('ListaValores');
+    const titulo = document.querySelector('.tituloCafe')
+    titulo.innerHTML = 'VALORES'
+  };
+
   
   // AQUI MOSTRA OS PRODUTOS
   const [produtos, setProdutos] = useState([]);
@@ -86,14 +104,11 @@ function RelatorioCafe() {
       });
   }
   
-
 //MenuBar barras
 const exibirBarraSuperiorRelatorio = true;
 const exibirBarraSuperiorCafe = false;
 const exibirBarraSuperiorGado = false;
 const exibirBarraSuperiorHome = false;
-
-
 
 if (destination === "back") {
   return <Page2 />;
@@ -123,34 +138,58 @@ else{
        RELATÓRIOS DO CAFÉ
       </div>
 
-      <div className='divListaCafe'>
-        {[...new Set(produtos)].map((produto, index) => (
-          <div className='itemCafe' onClick={handleButtonDataCafe} key={index}>{produto}</div>
-        ))}
-      </div>
+      {currentList === 'ListaCafe' && (
+        <div className='divListaCafe'>
+          {[...new Set(produtos)].map((produto, index) => (
+            <div className='itemCafe' onClick={ButtonDataCafe} key={index}>
+              {produto}
+            </div>
+          ))}
+        </div>
+      )}
 
-      <div className='divListaCafe'>
-        {date.map((date, index) => (
-          <div className='itemCafe' onClick = {handleButtonValoresCafe} key={index}>{date}</div>
-        ))}
-      </div>
+      {currentList === 'ListaData' && (
+        <div className='divListaData'>
+          {date.map((date, index) => (
+            <div className='itemData' onClick={ButtonValoresCafe} key={index}>
+              {date}
+            </div>
+          ))}
 
-      <div className='divListaCafe'>
-        {valores.map((listaValores, index) => (
-          <div className='itemCafe' key={index}>
-            {listaValores.map((valor, index) => (
-              <div key={index}>
-                Evapotranspiração: <strong>{valor.values.evapotranspiration}</strong> mm/h<br/>
-                Umidade: <strong>{valor.values.humidity}</strong> %<br/>
-                Precipitação: <strong>{valor.values.precipitationProbability}</strong> %<br/>
-                Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h<br/>
-                Temperatura: <strong>{valor.values.temperature}</strong> °C<br/>
-                Velocidade do vento: <strong>{valor.values.windSpeed}</strong> km/h<br/>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+            <div className='itemData' onClick={ButtonValoresCafe} >
+              ITEMDATA
+            </div>
+        </div>
+      )}
+
+      {currentList === 'ListaValores' && (
+        <div className='divListaValores'>
+          {valores.map((listaValores, index) => (
+            <div className='itemCafe' key={index}>
+              {listaValores.map((valor, index) => (
+                <div key={index}>
+                  Evapotranspiração: <strong>{valor.values.evapotranspiration}</strong> mm/h
+                  <br />
+                  Umidade: <strong>{valor.values.humidity}</strong> %
+                  <br />
+                  Precipitação: <strong>{valor.values.precipitationProbability}</strong> %
+                  <br />
+                  Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h
+                  <br />
+                  Temperatura: <strong>{valor.values.temperature}</strong> °C
+                  <br />
+                  Velocidade do vento: <strong>{valor.values.windSpeed}</strong> km/h
+                  <br />
+                </div>
+              ))}
+            </div>
+          ))}
+
+            <div className='itemData' >
+              ITEMVALORES
+            </div>
+        </div>
+      )}
 
 
               {/* AQUI É A  MENUBAR */}
