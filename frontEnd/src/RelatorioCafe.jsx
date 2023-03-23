@@ -141,7 +141,7 @@ else{
       {currentList === 'ListaCafe' && (
         <div className='divListaCafe'>
           {[...new Set(produtos)].map((produto, index) => (
-            <div className='itemCafe' onClick={ButtonDataCafe} key={index}>
+            <div className='itemCafe' onClick={ButtonDataCafe} onMouseDown={handleButtonDataCafe} key={index}>
               {produto}
             </div>
           ))}
@@ -151,14 +151,10 @@ else{
       {currentList === 'ListaData' && (
         <div className='divListaData'>
           {date.map((date, index) => (
-            <div className='itemData' onClick={ButtonValoresCafe} key={index}>
+            <div className='itemData' onClick={ButtonValoresCafe} onMouseDown={handleButtonValoresCafe} key={index}>
               {date}
             </div>
           ))}
-
-            <div className='itemData' onClick={ButtonValoresCafe} >
-              ITEMDATA
-            </div>
         </div>
       )}
 
@@ -184,10 +180,6 @@ else{
               ))}
             </div>
           ))}
-
-            <div className='itemData' >
-              ITEMVALORES
-            </div>
         </div>
       )}
 

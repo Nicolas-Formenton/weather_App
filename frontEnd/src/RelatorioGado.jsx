@@ -44,6 +44,19 @@ function RelatorioGado() {
     setDestination("apiCafe")
   };
 
+  const [currentList, setCurrentList] = useState('ListaGado');
+
+  const ButtonDataGado = () => {
+    setCurrentList('ListaData');
+    const titulo = document.querySelector('.tituloGado')
+    titulo.innerHTML = 'DATA'
+  };
+
+  const ButtonValoresGado = () => {
+    setCurrentList('ListaValores');
+    const titulo = document.querySelector('.tituloGado')
+    titulo.innerHTML = 'VALORES'
+  };
   
   const [nome, setNome] = useState([]);
   useEffect(() => {
@@ -56,7 +69,7 @@ function RelatorioGado() {
       });
   }, []);
 
-    const [nomeSelecionado, setNomeSelecionado] = useState('');
+  const [nomeSelecionado, setNomeSelecionado] = useState('');
 
   // AQUI MOSTRA AS DATAS
   const [date, setDate] = useState([]);
@@ -121,18 +134,23 @@ else{
         RELATÓRIOS DO GADO
       </div>
 
-<div className='divListaGado'>
-        {[...new Set(nome)].map((nome, index) => (
-          <div className='itemGado' onClick={handleButtonDataGado} key={index}>{nome}</div>
-        ))}
-      </div>
-
+      {currentList === 'ListaGado' && (
       <div className='divListaGado'>
-        {date.map((date, index) => (
-          <div className='itemGado' onClick = {handleButtonValoresGado} key={index}>{date}</div>
+        {[...new Set(nome)].map((nome, index) => (
+          <div className='itemGado' onClick={ButtonDataGado} onMouseDown = {handleButtonDataGado} key={index}>{nome}</div>
         ))}
       </div>
+      )}
 
+      {currentList === 'ListaData' && (
+      <div className='divListaData'>
+        {date.map((date, index) => (
+          <div className='itemData' onClick = {ButtonValoresGado} onMouseDown = {handleButtonValoresGado} key={index}>{date}</div>
+        ))}
+      </div>
+      )}
+
+      {currentList === 'ListaValores' && (
       <div className='divListaGado'>
         {valores.map((listaValores, index) => (
           <div className='itemGado' key={index}>
@@ -146,6 +164,7 @@ else{
           </div>
         ))}
       </div>
+      )}
 
 
 
