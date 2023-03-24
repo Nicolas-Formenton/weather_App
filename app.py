@@ -470,10 +470,6 @@ def api_valores_cafe():
 
         # Adicione o array de valores a lista
         valores_list.append(json_data)
-    
-    for valores in valores_list:
-        for valor in valores:
-            valor.pop('startTime')
 
     # Retorne a lista de arrays de valores como JSON
 
@@ -535,7 +531,6 @@ def api_valores_gado():
     cursor = conn.cursor()
     cursor.execute(f"SELECT valores FROM gado WHERE nome = '{nome}' AND piquete = '{piquete}'")
 
-
     valores_list = []
     # Itere através dos resultados do cursor
     for row in cursor:
@@ -547,10 +542,6 @@ def api_valores_gado():
 
         # Adicione o array de valores a lista
         valores_list.append(json_data)
-    
-    for valores in valores_list:
-        for valor in valores:
-            valor.pop('startTime')
 
     # Retorne a lista de arrays de valores como JSON
 
