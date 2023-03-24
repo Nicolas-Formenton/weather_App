@@ -51,6 +51,7 @@ function RelatorioCafe() {
   const [currentList, setCurrentList] = useState('ListaCafe');
 
   const ButtonDataCafe = () => {
+    
     setCurrentList('ListaData');
     const titulo = document.querySelector('.tituloCafe')
     titulo.innerHTML = 'DATA'
@@ -103,6 +104,15 @@ function RelatorioCafe() {
         console.error(error);
       });
   }
+
+  // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
+  function addBoxShadow(elemento) {
+    elemento.style.boxShadow = "0px 0px 5px #204b5e";
+  }
+
+  function removeBoxShadow(elemento) {
+    elemento.style.boxShadow = "0px 0px 0px #204b5e";
+  }
   
 //MenuBar barras
 const exibirBarraSuperiorRelatorio = true;
@@ -141,7 +151,7 @@ else{
       {currentList === 'ListaCafe' && (
         <div className='divListaCafe'>
           {[...new Set(produtos)].map((produto, index) => (
-            <div className='itemCafe' onClick={ButtonDataCafe} onMouseDown={handleButtonDataCafe} key={index}>
+            <div className='itemCafe' onMouseEnter={(e) => addBoxShadow(e.target)} onMouseLeave={(e) => removeBoxShadow(e.target)} onClick={ButtonDataCafe} onMouseDown={handleButtonDataCafe} key={index}>
               {produto}
             </div>
           ))}
@@ -151,7 +161,7 @@ else{
       {currentList === 'ListaData' && (
         <div className='divListaData'>
           {date.map((date, index) => (
-            <div className='itemData' onClick={ButtonValoresCafe} onMouseDown={handleButtonValoresCafe} key={index}>
+            <div className='itemData' onClick={ButtonValoresCafe} onMouseEnter={(e) => addBoxShadow(e.target)} onMouseLeave={(e) => removeBoxShadow(e.target)} onMouseDown={handleButtonValoresCafe} key={index}>
               {date}
             </div>
           ))}
@@ -161,22 +171,34 @@ else{
       {currentList === 'ListaValores' && (
         <div className='divListaValores'>
           {valores.map((listaValores, index) => (
-            <div className='itemCafe' key={index}>
+            <div key={index}>
               {listaValores.map((valor, index) => (
-                <div key={index}>
+                <ul key={index}>
+                  <div>
                   Evapotranspiração: <strong>{valor.values.evapotranspiration}</strong> mm/h
-                  <br />
-                  Umidade: <strong>{valor.values.humidity}</strong> %
-                  <br />
-                  Precipitação: <strong>{valor.values.precipitationProbability}</strong> %
-                  <br />
-                  Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h
-                  <br />
+                  </div>
+    
+                  <div>
+                  Umidade: <strong>{valor.values.humidity}</strong>
+                  </div>
+
+                  <div>
                   Temperatura: <strong>{valor.values.temperature}</strong> °C
-                  <br />
+                  </div>
+
+                  <div>
+                  Precipitação: <strong>{valor.values.precipitationProbability}</strong> %
+                  </div>
+
+                  <div>
+                  Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h
+                  </div>
+                  
+                  <div>
                   Velocidade do vento: <strong>{valor.values.windSpeed}</strong> km/h
-                  <br />
-                </div>
+                  </div>
+                </ul>
+                
               ))}
             </div>
           ))}
