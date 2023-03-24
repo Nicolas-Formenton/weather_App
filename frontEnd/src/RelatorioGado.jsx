@@ -98,6 +98,15 @@ function RelatorioGado() {
       });
   }
 
+  // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
+  function addBoxShadow(elemento) {
+    elemento.style.boxShadow = "0px 0px 5px #204b5e";
+  }
+
+  function removeBoxShadow(elemento) {
+    elemento.style.boxShadow = "0px 0px 0px #204b5e";
+  }
+
   //MenuBar barras
   const exibirBarraSuperiorRelatorio = true;
   const exibirBarraSuperiorCafe = false;
@@ -130,36 +139,36 @@ else if(destination == "relatorioGado"){
 else{
   return (
     <form className='divInput'>
-      <div className='divGadoPai'>
+      <div className='tituloGado'>
         RELATÓRIOS DO GADO
       </div>
 
       {currentList === 'ListaGado' && (
       <div className='divListaGado'>
         {[...new Set(nome)].map((nome, index) => (
-          <div className='itemGado' onClick={ButtonPiqueteGado} onMouseDown = {handleButtonPiqueteGado} key={index}>{nome}</div>
+          <div className='itemGado' onMouseEnter={(e) => addBoxShadow(e.target)} onMouseLeave={(e) => removeBoxShadow(e.target)} onClick={ButtonPiqueteGado} onMouseDown = {handleButtonPiqueteGado} key={index}>{nome}</div>
         ))}
       </div>
       )}
 
       {currentList === 'ListaPiquete' && (
-      <div className='divListaGado'>
-        {piquete.map((piquete, index) => (
-          <div className='itemData' onClick = {ButtonValoresGado} onMouseDown = {handleButtonValoresGado} key={index}>{piquete}</div>
-        ))}
-      </div>
+        <div className='divListaData'>
+          {piquete.map((piquete, index) => (
+            <div className='itemData' onMouseEnter={(e) => addBoxShadow(e.target)} onMouseLeave={(e) => removeBoxShadow(e.target)} onClick = {ButtonValoresGado} onMouseDown = {handleButtonValoresGado} key={index}>{piquete}</div>
+          ))}
+        </div>
       )}
 
       {currentList === 'ListaValores' && (
-      <div className='divListaGado'>
+      <div className='divListaValores'>
         {valores.map((listaValores, index) => (
-          <div className='itemGado' key={index}>
+          <div key={index}>
             {listaValores.map((valor, index) => (
-              <div key={index}>
+              <ul  key={index}>
                 Temperatura: <strong>{valor.values.temperature}</strong> °C<br/>
                 Precipitação: <strong>{valor.values.precipitationProbability}</strong> %<br/>
                 Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h<br/>
-              </div>
+              </ul>
             ))}
           </div>
         ))}
