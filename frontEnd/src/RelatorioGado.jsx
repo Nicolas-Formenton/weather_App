@@ -36,7 +36,6 @@ function RelatorioGado() {
   setDestination("relatorioGado");
   };
 
-
   const handleButtonBack = () => {
     setDestination("back");
   };
@@ -47,7 +46,6 @@ function RelatorioGado() {
 
   const [currentList, setCurrentList] = useState('ListaGado');
 
-  
   const [nome, setNome] = useState([]);
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/apiProdutosGado')
@@ -76,43 +74,43 @@ function RelatorioGado() {
       }; 
       
       // AQUI MOSTRA OS VALORES
-      const [piqueteSelecionado, setPiqueteSelecionado] = useState('');
-      const [valores, setValores] = useState([]);
-      const handleButtonValoresGado = (event) => {
-        const piquete = event.target.textContent;
-        setPiqueteSelecionado(piquete);
-        axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&piquete=${piquete}`)
-        .then(response => {
-          setValores(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-      }
+  const [piqueteSelecionado, setPiqueteSelecionado] = useState('');
+  const [valores, setValores] = useState([]);
+  const handleButtonValoresGado = (event) => {
+    const piquete = event.target.textContent;
+    setPiqueteSelecionado(piquete);
+    axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&piquete=${piquete}`)
+    .then(response => {
+      setValores(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
 
-      const ButtonPiqueteGado = () => {
-        setCurrentList('ListaPiquete');
-        const titulo = document.querySelector('.tituloGado')
-        titulo.innerHTML = `Piquetes disponíveis para ${nomeSelecionado}`
-      };
-    
-      const ButtonValoresGado = () => {
-        setCurrentList('ListaValores');
-        const titulo = document.querySelector('.tituloGado')
-        titulo.innerHTML = `Valores disponíveis para o piquete ${piqueteSelecionado}`
-      };
-      
-      // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
-      function addBoxShadow(elemento) {
-        elemento.style.boxShadow = "0px 0px 5px #204b5e";
-      }
-      
-      function removeBoxShadow(elemento) {
-        elemento.style.boxShadow = "0px 0px 0px #204b5e";
-      }
-      
-      //MenuBar barras
-      const exibirBarraSuperiorRelatorio = true;
+  const ButtonPiqueteGado = () => {
+    setCurrentList('ListaPiquete');
+    const titulo = document.querySelector('.tituloGado')
+    titulo.innerHTML = `Piquetes disponíveis para ${nomeSelecionado}`
+  };
+
+  const ButtonValoresGado = () => {
+    setCurrentList('ListaValores');
+    const titulo = document.querySelector('.tituloGado')
+    titulo.innerHTML = `Valores disponíveis para o piquete ${piqueteSelecionado}`
+  };
+  
+  // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
+  function addBoxShadow(elemento) {
+    elemento.style.boxShadow = "0px 0px 5px #204b5e";
+  }
+  
+  function removeBoxShadow(elemento) {
+    elemento.style.boxShadow = "0px 0px 0px #204b5e";
+  }
+  
+  //MenuBar barras
+  const exibirBarraSuperiorRelatorio = true;
   const exibirBarraSuperiorCafe = false;
   const exibirBarraSuperiorGado = false;
   const exibirBarraSuperiorHome = false;
