@@ -10,6 +10,8 @@ import MenuBar from './menubar'
 import Relatorio from "./Relatorio";
 import axios from 'axios';
 import DataCafe from './DataCafe'
+import FormatDate from './date';
+import FormatDate2 from './date2';
 
 function RelatorioCafe() {
 
@@ -45,24 +47,9 @@ function RelatorioCafe() {
   };
   
 
-
   // ALTERAÇÃO DE LISTA 
-
   const [currentList, setCurrentList] = useState('ListaCafe');
-
-  const ButtonDataCafe = () => {
-    
-    setCurrentList('ListaData');
-    const titulo = document.querySelector('.tituloCafe')
-    titulo.innerHTML = 'DATA'
-  };
-
-  const ButtonValoresCafe = () => {
-    setCurrentList('ListaValores');
-    const titulo = document.querySelector('.tituloCafe')
-    titulo.innerHTML = 'VALORES'
-  };
-
+  
   
   // AQUI MOSTRA OS PRODUTOS
   const [produtos, setProdutos] = useState([]);
@@ -76,34 +63,49 @@ function RelatorioCafe() {
     });
   }, []);
   
-  const [produtoSelecionado, setProdutoSelecionado] = useState('');
   
+  const [produtoSelecionado, setProdutoSelecionado] = useState('');
   // AQUI MOSTRA AS DATAS
   const [date, setDate] = useState([]);
-    const handleButtonDataCafe = (event) => {
-      const nome_produto = event.target.textContent;
-      setProdutoSelecionado(nome_produto);
-      axios.get(`http://127.0.0.1:5000/apiDatasCafé?nome_produto=${nome_produto}`)
-        .then(response => {
-          setDate(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+  const handleButtonDataCafe = (event) => {
+    const nome_produto = event.target.textContent;
+    setProdutoSelecionado(nome_produto);
+    axios.get(`http://127.0.0.1:5000/apiDatasCafé?nome_produto=${nome_produto}`)
+    .then(response => {
+      setDate(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }; 
+  
 
   // AQUI MOSTRA OS VALORES
+  const [dataSelecionada, setDataSelecionada] = useState('');
   const [valores, setValores] = useState([]);
-    const handleButtonValoresCafe = (event) => {
-      const dataInicio = event.target.textContent;
-      axios.get(`http://127.0.0.1:5000/apiValoresCafé?nome_produto=${produtoSelecionado}&dataInicio=${dataInicio}`)
-      .then(response => {
+  const handleButtonValoresCafe = (event) => {
+    const dataInicio = event.target.textContent;
+    setDataSelecionada(dataInicio);
+    axios.get(`http://127.0.0.1:5000/apiValoresCafé?nome_produto=${produtoSelecionado}&dataInicio=${dataInicio}`)
+    .then(response => {
         setValores(response.data);
       })
       .catch(error => {
         console.error(error);
       });
-  }
+    }
+    
+    const ButtonDataCafe = () => {
+      setCurrentList('ListaData');
+      const titulo = document.querySelector('.tituloCafe')
+      titulo.innerHTML = `Datas disponíveis para ${produtoSelecionado}`;
+    };
+  
+    const ButtonValoresCafe = () => {
+      setCurrentList('ListaValores');
+      const titulo = document.querySelector('.tituloCafe')
+      titulo.innerHTML = `Valores disponíveis para ${dataSelecionada}`; 
+    };
 
   // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
   function addBoxShadow(elemento) {
@@ -175,27 +177,30 @@ else{
               {listaValores.map((valor, index) => (
                 <ul key={index}>
                   <div>
-                  Evapotranspiração: <strong>{valor.values.evapotranspiration}</strong> mm/h
+                    <strong>{FormatDate(valor.startTime)}</strong>
+                  </div>
+                  <div>
+                  Evapotranspiração: <strong>{valor.values.evapotranspiration} mm/h</strong>
                   </div>
     
                   <div>
-                  Umidade: <strong>{valor.values.humidity}</strong>
+                  Umidade: <strong>{valor.values.humidity}%</strong>
                   </div>
 
                   <div>
-                  Temperatura: <strong>{valor.values.temperature}</strong> °C
+                  Temperatura: <strong>{valor.values.temperature}°C</strong>
                   </div>
 
                   <div>
-                  Precipitação: <strong>{valor.values.precipitationProbability}</strong> %
+                  Precipitação: <strong>{valor.values.precipitationProbability}%</strong>
                   </div>
 
                   <div>
-                  Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h
+                  Acumulo de Chuva: <strong>{valor.values.rainAccumulation} mm/h</strong>
                   </div>
                   
                   <div>
-                  Velocidade do vento: <strong>{valor.values.windSpeed}</strong> km/h
+                  Velocidade do vento: <strong>{valor.values.windSpeed} km/h</strong>
                   </div>
                 </ul>
                 

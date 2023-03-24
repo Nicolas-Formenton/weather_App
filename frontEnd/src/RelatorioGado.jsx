@@ -9,6 +9,7 @@ import Gado from './Gado'
 import MenuBar from './menubar'
 import Relatorio from "./Relatorio";
 import axios from 'axios';
+import FormatDate2 from './date2';
 
 function RelatorioGado() {
 
@@ -46,69 +47,72 @@ function RelatorioGado() {
 
   const [currentList, setCurrentList] = useState('ListaGado');
 
-  const ButtonPiqueteGado = () => {
-    setCurrentList('ListaPiquete');
-    const titulo = document.querySelector('.tituloGado')
-    titulo.innerHTML = 'PIQUETE'
-  };
-
-  const ButtonValoresGado = () => {
-    setCurrentList('ListaValores');
-    const titulo = document.querySelector('.tituloGado')
-    titulo.innerHTML = 'VALORES'
-  };
   
   const [nome, setNome] = useState([]);
   useEffect(() => {
     axios.get('http://127.0.0.1:5000/apiProdutosGado')
-      .then(response => {
-        setNome(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    .then(response => {
+      setNome(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }, []);
-
+  
   const [nomeSelecionado, setNomeSelecionado] = useState('');
-
+  
   // AQUI MOSTRA AS DATAS
   const [piquete, setPiquete] = useState([]);
-    const handleButtonPiqueteGado = (event) => {
-      const nome = event.target.textContent;
-      setNomeSelecionado(nome);
-      axios.get(`http://127.0.0.1:5000/apiPiqueteGado?nome=${nome}`)
-        .then(response => {
-          setPiquete(response.data);
+  const handleButtonPiqueteGado = (event) => {
+    const nome = event.target.textContent;
+    setNomeSelecionado(nome);
+    axios.get(`http://127.0.0.1:5000/apiPiqueteGado?nome=${nome}`)
+    .then(response => {
+      setPiquete(response.data);
         })
         .catch(error => {
           console.error(error);
         });
-  }; 
+      }; 
+      
+      // AQUI MOSTRA OS VALORES
+      const [piqueteSelecionado, setPiqueteSelecionado] = useState('');
+      const [valores, setValores] = useState([]);
+      const handleButtonValoresGado = (event) => {
+        const piquete = event.target.textContent;
+        setPiqueteSelecionado(piquete);
+        axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&piquete=${piquete}`)
+        .then(response => {
+          setValores(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }
 
-  // AQUI MOSTRA OS VALORES
-  const [valores, setValores] = useState([]);
-    const handleButtonValoresGado = (event) => {
-      const piquete = event.target.textContent;
-      axios.get(`http://127.0.0.1:5000/apiValoresGado?nome=${nomeSelecionado}&piquete=${piquete}`)
-      .then(response => {
-        setValores(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
-  // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
-  function addBoxShadow(elemento) {
-    elemento.style.boxShadow = "0px 0px 5px #204b5e";
-  }
-
-  function removeBoxShadow(elemento) {
-    elemento.style.boxShadow = "0px 0px 0px #204b5e";
-  }
-
-  //MenuBar barras
-  const exibirBarraSuperiorRelatorio = true;
+      const ButtonPiqueteGado = () => {
+        setCurrentList('ListaPiquete');
+        const titulo = document.querySelector('.tituloGado')
+        titulo.innerHTML = `Piquetes disponíveis para ${nomeSelecionado}`
+      };
+    
+      const ButtonValoresGado = () => {
+        setCurrentList('ListaValores');
+        const titulo = document.querySelector('.tituloGado')
+        titulo.innerHTML = `Valores disponíveis para o piquete ${piqueteSelecionado}`
+      };
+      
+      // AQUI ESTA O EFEITO DE CLICK DOS ITENS DA LISTA
+      function addBoxShadow(elemento) {
+        elemento.style.boxShadow = "0px 0px 5px #204b5e";
+      }
+      
+      function removeBoxShadow(elemento) {
+        elemento.style.boxShadow = "0px 0px 0px #204b5e";
+      }
+      
+      //MenuBar barras
+      const exibirBarraSuperiorRelatorio = true;
   const exibirBarraSuperiorCafe = false;
   const exibirBarraSuperiorGado = false;
   const exibirBarraSuperiorHome = false;
@@ -165,9 +169,10 @@ else{
           <div key={index}>
             {listaValores.map((valor, index) => (
               <ul  key={index}>
-                Temperatura: <strong>{valor.values.temperature}</strong> °C<br/>
-                Precipitação: <strong>{valor.values.precipitationProbability}</strong> %<br/>
-                Acumulo de Chuva: <strong>{valor.values.rainAccumulation}</strong> mm/h<br/>
+                <strong>{FormatDate2(valor.startTime)}</strong><br/>
+                Temperatura: <strong>{valor.values.temperature}°C</strong><br/>
+                Precipitação: <strong>{valor.values.precipitationProbability}%</strong><br/>
+                Acumulo de Chuva: <strong>{valor.values.rainAccumulation} mm/h</strong><br/>
               </ul>
             ))}
           </div>
