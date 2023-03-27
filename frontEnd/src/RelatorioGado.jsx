@@ -162,20 +162,21 @@ else{
       )}
 
       {currentList === 'ListaValores' && (
-      <div className='divListaValores'>
-        {valores.map((listaValores, index) => (
-          <div key={index}>
-            {listaValores.map((valor, index) => (
-              <ul  key={index}>
-                <strong>{FormatDate2(valor.startTime)}</strong><br/>
-                Temperatura: <strong>{valor.values.temperature}°C</strong><br/>
-                Precipitação: <strong>{valor.values.precipitationProbability}%</strong><br/>
-                Acumulo de Chuva: <strong>{valor.values.rainAccumulation} mm/h</strong><br/>
-              </ul>
-            ))}
-          </div>
-        ))}
-      </div>
+        <div className='divListaValores'>
+          {valores.map((obj, index) => (
+            <div key={index}>
+              <p>Observação: {obj.observação}</p>
+              {obj.valores.map((valor, index) => (
+                <ul key={index}>
+                  <strong>{FormatDate2(valor.startTime)}</strong><br />
+                  Temperatura: <strong>{valor.values.temperature}°C</strong><br />
+                  Precipitação: <strong>{valor.values.precipitationProbability}%</strong><br />
+                  Acumulo de Chuva: <strong>{valor.values.rainAccumulation} mm/h</strong><br />
+                </ul>
+              ))}
+            </div>
+          ))}
+        </div>
       )}
 
 

@@ -520,7 +520,7 @@ def api_piquetes_gado():
     # Retorna as informações como JSON
     return jsonify(datas)
 
-@app.route('/apiValoresGado', methods = ['GET'])
+@app.route('/apiValoresGado', methods = ['GET', 'PUT'])
 def api_valores_gado():
     nome = request.args.get('nome')
     piquete = request.args.get('piquete')
@@ -529,7 +529,7 @@ def api_valores_gado():
     conn = pyodbc.connect(conn_str)
     
     cursor = conn.cursor()
-    cursor.execute(f"SELECT valores FROM gado WHERE nome = '{nome}' AND piquete = '{piquete}'")
+    cursor.execute(f"SELECT valores, observação FROM gado WHERE nome = '{nome}' AND piquete = '{piquete}'")
 
     valores_list = []
     # Itere através dos resultados do cursor
@@ -540,8 +540,14 @@ def api_valores_gado():
         # Analise a string JSON em um objeto Python
         json_data = json.loads(json_string)
 
+        # Adicione o array de valores e a observação a um dicionário
+        dados = {
+        'valores': json_data,
+        'observação': row[1]
+        }
+        
         # Adicione o array de valores a lista
-        valores_list.append(json_data)
+        valores_list.append(dados)
 
     # Retorne a lista de arrays de valores como JSON
 
